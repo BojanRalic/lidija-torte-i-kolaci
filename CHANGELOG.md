@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.0 (07.10.2026)
+
+V2 „Slatki trenuci“:
+- Sekcija „Dostava torti u Leskovcu i okolini“ preneta je sa glavne stranice, sa istim tekstom i mapom, u bojama V2: tačkasta roza kartica, serif natpisi, čokoladna kutija sa roze mašnom za Leskovac. Nova hover animacija: putevi se redom iscrtavaju iz Leskovca, a kad stignu, gradovi zasvetle i rašire talas, i poklopac kutije poskoči. Na telefonu se putevi iscrtaju kad se mapa pojavi na ekranu. Kartica „Daleko ste?“ je sada u punoj širini ispod mape.
+- „Lidija i Milan“: detaljan presek torte sa opisima umesto velike fotografije. Kora sa mrvicama i rupicama, krem, domaći džem od malina sa semenkama, čokoladna kora, mus, keks podloga, glazura od belgijske čokolade koja se sliva niz bok, ruže od krema, maline, borovnice, list čokolade, nana i zlatni listići, na tanjiru sa zlatnim rubom i viljuškom. Slojevi padaju jedan na drugi kad se sekcija pojavi. Fotografija je u malom luku pored torte. Crtež pravi `tools/presek.py`.
+- Kontakt meni u zaglavlju ima oblik luka sa čokoladnim vrhom i natpisom „Javite se“. Redovi ulaze jedan za drugim, a na hover dobijaju strelicu.
+- Uklonjeno lila cveće iz naslovne pozadine.
+
 ## v0.3.2 (07.10.2026)
 
 V2 „Slatki trenuci“:
