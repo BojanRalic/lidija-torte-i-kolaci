@@ -1,0 +1,18 @@
+/* Version switcher for the client preview. Remove this file and the .vsw block once a direction is chosen. */
+.vsw { position: relative; flex: none; font-size: .85rem; line-height: 1.2; }
+.vsw summary { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px; border: 1px dashed currentColor; border-radius: 999px; cursor: pointer; list-style: none; letter-spacing: .04em; opacity: .85; transition: opacity .2s, background-color .2s; }
+.vsw summary::-webkit-details-marker { display: none; }
+.vsw summary:hover, .vsw[open] summary { opacity: 1; background: rgb(255 255 255 / .6); }
+.vsw summary::after { content: ""; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-2px) rotate(45deg); transition: transform .25s; }
+.vsw[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.vsw-pop { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; width: 250px; padding: 8px; background: #fff; color: #3B2420; border-radius: 14px; box-shadow: 0 14px 40px rgb(59 36 32 / .18), 0 0 0 1px rgb(59 36 32 / .06); }
+.vsw-pop p { margin: 4px 10px 8px; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; opacity: .6; }
+.vsw-pop a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; color: inherit; text-decoration: none; transition: background-color .2s; }
+.vsw-pop a:hover { background: #FBEFF2; }
+.vsw-pop a b { display: inline-grid; place-items: center; min-width: 34px; height: 24px; padding: 0 6px; border-radius: 999px; background: #F6E3E8; font-size: .75rem; }
+.vsw-pop a[aria-current] { background: #FBEFF2; font-weight: 700; }
+.vsw-pop a[aria-current] b { background: #B23C6F; color: #fff; }
+@media (max-width: 640px) {
+  .vsw summary { min-height: 36px; padding: 0 11px; font-size: .8rem; }
+  .vsw-pop { position: fixed; left: 16px; right: 16px; top: auto; width: auto; margin-top: 8px; }
+}
