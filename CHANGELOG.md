@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.4.1 (07.10.2026)
+
+V2 „Slatki trenuci“:
+- „Lidija i Milan“ ima ponovo raniji izgled (velika fotografija sa značkom „20 godina“ i tekst). Presek torte je ispod, u svojoj roze kartici „Pogledajte šta je unutra“.
+- Svaki sloj preseka je sada 3D komad sa svojim vrhom, bokom i prednjom stranom, pa torta ne izgleda prazno dok se slaže.
+- Slojevi i opisi su povezani: pređite preko opisa ili sloja i taj sloj izađe iz torte, opis se istakne, a ostali slojevi se priguše. Na telefonu isto rade dugmići sa opisima ispod torte.
+- Kontakt meni: čokoladni luk sa natpisom „Javite se“ je sada na dnu.
+- Linkovi u meniju: na hover se iza reči pojavi krem polje, a ispod nje mala bordo tačka.
+
 ## v0.4.0 (07.10.2026)
 
 V2 „Slatki trenuci“:
