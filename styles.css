@@ -1091,9 +1091,49 @@ img.lid-bow { width: 30%; right: -2%; top: -9%; }
 @media (max-width: 900px) { .p1-bow { display: none; } .p1-line::before { background: url("assets/deco/satin-v.webp") 50% 0 / 100% auto repeat-y; } }
 
 /* Paper grain on every card that stands in for paper */
-.print, .menu-paper, .qa-list, .postcard, .slip, .receipt, .p1-tag, .gift-tag, .rev-note, .l4-pol, .lid {
+.print, .menu-paper, .qa-list, .postcard, .slip, .p1-tag, .gift-tag, .rev-note, .l4-pol, .lid {
   background-image: url("assets/deco/grain.webp") !important; background-size: 160px !important;
 }
 .postcard::before { background: url("assets/deco/grain.webp") 0 0 / 160px, repeating-linear-gradient(-45deg, var(--pink-deep) 0 16px, var(--board) 16px 26px, var(--sky) 26px 42px, var(--board) 42px 52px); }
 img.p1-ribbon { object-fit: fill; filter: none; }
 .p1-item::after { background: url("assets/deco/bow.webp") center / contain no-repeat; width: 48px; height: 34px; margin-left: -24px; filter: drop-shadow(0 2px 2px rgb(116 46 78 / .3)); }
+
+/* ================= Layout fixes: nothing clipped by its parent, mobile breathing room ================= */
+/* Receipt: the scalloped edge is masked on a background layer, so the tape on top is no longer cut */
+.receipt { -webkit-mask: none; mask: none; background: none; isolation: isolate; }
+.receipt::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--mist) url("assets/deco/grain.webp") 0 0 / 160px;
+  -webkit-mask: radial-gradient(9px at 50% 100%, transparent 98%, #000) 50% 100% / 22px 100% repeat-x;
+          mask: radial-gradient(9px at 50% 100%, transparent 98%, #000) 50% 100% / 22px 100% repeat-x;
+}
+@media (max-width: 900px) {
+  .p-cups .sticker { right: 8px; }
+  .tag-wrap { margin-left: 34px; }
+  img.tag-cord { left: -46px; width: 100px; top: calc(50% - 40px); }
+  .call-link, .proof, .insta-handle { min-height: 44px; }
+  .gift-tag .big-phone { display: inline-flex; align-items: center; min-height: 44px; }
+}
+@media (max-width: 420px) {
+  .tag-wrap { margin-left: 22px; }
+  img.tag-cord { left: -34px; width: 78px; }
+  .gift-tag { padding: 28px 20px 26px 44px; }
+  .gift-tag .big-phone { font-size: 1.8rem; }
+  .gift-tag .big-phone.small { font-size: 1.3rem; }
+}
+@media (max-width: 900px) {
+  .p1-item::before { display: none; }
+  .l4-slice svg { margin: 0 auto; width: min(100%, 420px); display: block; }
+  .map .t-bojnik { transform: translate(-30px, 18px); }
+}
+@media (max-width: 420px) {
+  .top { gap: 10px; }
+  .brand { gap: 8px; }
+  .brand-name { font-size: 1.05rem; }
+  .brand-name em { white-space: nowrap; font-size: .66rem; letter-spacing: .1em; }
+  .btn-contact { padding: 0 .75em; }
+}
+@media (max-width: 640px) { .box-stage { margin-top: 26px; } }
+
+/* Phone numbers never break across lines */
+a[href^="tel:"] { white-space: nowrap; }

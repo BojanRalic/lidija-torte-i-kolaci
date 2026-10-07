@@ -251,3 +251,11 @@ if (vsw) {
   document.addEventListener('click', (e) => { if (!vsw.contains(e.target)) vsw.open = false; });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') vsw.open = false; });
 }
+
+// Cake slice: on narrow screens the side labels are hidden, so crop the drawing to the cake itself.
+const slice = document.querySelector('.l4-slice svg');
+if (slice) {
+  const mq = matchMedia('(max-width: 900px)');
+  const fit = () => slice.setAttribute('viewBox', mq.matches ? '4 0 432 520' : '0 0 720 520');
+  fit(); mq.addEventListener('change', fit);
+}

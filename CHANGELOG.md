@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 (07.10.2026)
+
+Ništa više ne viri iz svog okvira i telefon ima više prostora, na sve četiri stranice.
+
+- Isečeni elementi: washi traka na kartici „Šta nam pošaljete“ više nije odsečena maskom, kanap kartice u futeru i nalepnica „Za svaki praznik“ ostaju na ekranu, lila cveće u V2, gipsofila u V1, grančica i pečat u V3 ostaju unutar svojih okvira.
+- Telefon: zaglavlje staje u jedan red, mašna na kutiji ima prostor ispod zaglavlja, presek torte popunjava širinu, natpisi na mapi se ne preklapaju, kanap više ne visi bez kartice, gipsofila u V1 ne prekriva naslov u futeru, brojevi telefona se ne lome u dva reda.
+- Svi linkovi i dugmad na telefonu imaju bar 44 px za prst.
+
 ## v0.2.0 (07.10.2026)
 
 Nacrtane CSS dekoracije zamenjene su pravim materijalima na sve četiri stranice.

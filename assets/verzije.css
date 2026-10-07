@@ -13,6 +13,8 @@
 .vsw-pop a[aria-current] { background: #FBEFF2; font-weight: 700; }
 .vsw-pop a[aria-current] b { background: #B23C6F; color: #fff; }
 @media (max-width: 640px) {
-  .vsw summary { min-height: 36px; padding: 0 11px; font-size: .8rem; }
+  .vsw summary { min-height: 44px; padding: 0 12px; font-size: .8rem; }
+  .vsw summary::after { display: none; }
+  .vsw-pop a { min-height: 44px; }
   .vsw-pop { position: fixed; left: 16px; right: 16px; top: auto; width: auto; margin-top: 8px; }
 }

@@ -379,3 +379,22 @@ img.berries { width: 150px; }
 img.b-about { width: 130px; rotate: 0deg; margin: 0 0 6px 0; }
 .sp-m1 { left: -3%; bottom: -30px; width: 180px; }
 .sp-m2 { right: -3%; bottom: -30px; width: 160px; }
+
+/* Layout fixes: sprigs stay inside the page, larger tap targets */
+.marble { z-index: 0; }
+img.sp-m1 { left: 0; width: 150px; }
+img.sp-m2 { right: 0; width: 140px; }
+@media (max-width: 1100px) { img.sp-m1, img.sp-m2 { display: none; } }
+.car-btns button { width: 44px; height: 44px; }
+@media (max-width: 900px) {
+  .ig-handle, .facts a { display: inline-flex; align-items: center; min-height: 44px; }
+  .phones a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+img.sp-m1 { left: 16px; } img.sp-m2 { right: 16px; }
+/* Footer sprig sits above the heading instead of over it */
+.foot { padding-top: clamp(150px, 14vw, 180px); }
+img.sp-foot { top: 18px; width: 110px; rotate: -90deg; }
+@media (max-width: 640px) { img.b-about { display: none; } }
+
+/* Phone numbers never break across lines */
+a[href^="tel:"] { white-space: nowrap; }
