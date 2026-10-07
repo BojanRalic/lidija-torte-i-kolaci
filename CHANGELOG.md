@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.1 (07.10.2026)
+
+- Nova fotografija za „Rođendanske torte“ u V1, V2 i V3: roze torta sa siluetom princeze, leptirima i natpisom Happy Birthday, po izboru radionice. Glavna stranica ima zajedničku karticu „Rođendanske i dečje“ i ona ostaje sa fotografijom dečje torte.
+
 ## v0.3.0 (07.10.2026)
 
 Prave fotografije radionice, nova Instagram sekcija i nova torta u kalkulatoru, na sve četiri stranice.

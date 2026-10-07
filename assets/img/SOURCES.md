@@ -15,7 +15,7 @@ All photos are the client's own work, sent on 2026-10-07 (folder "Lidija Torte i
 | torta-plavo-cvece | Svaka torta je napravljena za vas.jpeg | V2 intro |
 | torta-prstenje | Cene, bez iznenađenja.jpeg | Cene (V1, V2) |
 | ruke-preliv | llll.jpeg | V1 O nama |
-| rodjendanska-crna | WhatsApp Image 2026-10-07 at 18.11.10.jpeg | Rođendanske torte (V1, V2, V3) |
+| rodjendanska-princeza | Rođendanske torte.jpeg | Rođendanske torte (V1, V2, V3) |
 | torta-krem-roze | WhatsApp Image 2026-10-07 at 18.11.06.jpeg | Torte za kuću |
 | praline-zlatne | WhatsApp Image 2026-10-07 at 18.12.13 (4).jpeg | V1 O nama, V3 Šta ide u naše torte |
 | prvi-rodjendan-oblaci | WhatsApp Image 2026-10-07 at 18.11.07.jpeg | index: prvi rođendan |
