@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.3 (07.10.2026)
+
+V2 „Slatki trenuci“, sekcija „Dostava torti u Leskovcu i okolini“:
+- Kada miš napusti mapu, linije dostave se uvlače nazad ka Leskovcu istim putem kojim su nacrtane. Ranije su samo nestajale.
+
 ## v0.5.2 (07.10.2026)
 
 V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:

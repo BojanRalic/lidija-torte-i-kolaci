@@ -356,7 +356,9 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 @keyframes dv-lid { 30% { transform: translateY(-10px) rotate(-8deg); } 65% { transform: translateY(-3px) rotate(5deg); } }
 @media (hover: hover) {
   .map-card:hover { transform: translateY(-6px); box-shadow: inset 0 0 0 1.5px rgb(59 36 32 / .07), 0 30px 44px -30px rgb(46 29 26 / .55); }
-  .map-card:hover .route { animation: dv-draw .9s var(--ease) calc(var(--i) * .12s) forwards; }
+  /* a transition instead of an animation, so on leave the line runs back the way it came */
+  .map .route { transition: stroke-dashoffset .8s cubic-bezier(.6, 0, .4, 1); }
+  .map-card:hover .route { stroke-dashoffset: 0; transition: stroke-dashoffset .9s var(--ease) calc(var(--i) * .12s); }
   .map-card:hover .dot { animation: dv-pop .6s var(--ease) calc(var(--i) * .12s + .7s) both; }
   .map-card:hover .ripple { animation: dv-ripple 1s ease-out calc(var(--i) * .12s + .7s) both; }
   .map-card:hover :is(.town, .far-arrow) text:not(.t-note) { fill: var(--berry); transition-delay: calc(var(--i) * .12s + .7s); }
