@@ -114,17 +114,20 @@ svg { width: 1em; height: 1em; flex: none; }
 .intro-copy p { margin: 18px 0 28px; color: var(--soft); max-width: 46ch; }
 .intro-img { position: relative; margin: 0; }
 .intro-img img { position: relative; z-index: 1; width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--r); }
-.lv-3 { right: -36px; top: -46px; rotate: 24deg; }
-.pillars { grid-column: 1 / -1; list-style: none; margin: clamp(24px, 4vw, 40px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.pillars li { padding: 26px 24px; border-radius: 28px; border: 1.5px solid rgb(59 36 32 / .14); transition: transform .45s var(--ease), background-color .3s; }
-.pillars li:hover { transform: translateY(-6px); background: var(--sand); }
-.pillars svg { font-size: 2.4rem; color: var(--berry); }
-.pillars h3 { margin-top: 12px; font: 400 1.5rem/1.1 var(--serif); }
-.pillars p { margin-top: 6px; color: var(--soft); font-size: .95rem; }
-.pillars .pl-on { background: var(--taupe); border-color: var(--taupe); }
-.pillars .pl-on:hover { background: #C29A8A; }
-.pillars .pl-on svg { color: var(--choc); }
-.pillars .pl-on p { color: var(--ink); }
+/* Pillars: three arches, like the hero photo, each in a tone from the palette */
+.pillars { grid-column: 1 / -1; list-style: none; margin: clamp(30px, 5vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); }
+.pillars li { --bg: var(--rose); --fg: var(--ink); --sub: var(--soft); --h: var(--choc); position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 46px 26px 44px; border-radius: 999px 999px var(--r) var(--r); background: var(--bg); color: var(--fg); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.pillars li::before { content: ""; position: absolute; inset: 10px; border: 1px solid color-mix(in srgb, var(--fg) 24%, transparent); border-radius: inherit; pointer-events: none; }
+.pillars li:hover { transform: translateY(-8px); box-shadow: 0 26px 36px -26px rgb(46 29 26 / .55); }
+.pl-ic { display: grid; place-items: center; width: 86px; aspect-ratio: 1; border-radius: 50%; background: var(--cream); color: var(--berry); box-shadow: 0 10px 18px -12px rgb(46 29 26 / .5); transition: rotate .6s var(--ease); }
+.pl-ic svg { font-size: 2.6rem; }
+.pillars li:hover .pl-ic { rotate: -12deg; }
+.pl-n { margin-top: 30px; font: italic 400 1rem/1 var(--serif); letter-spacing: .12em; color: var(--sub); }
+.pillars h3 { margin-top: 8px; font: 400 clamp(1.5rem, 2.2vw, 1.85rem)/1.1 var(--serif); color: var(--h); }
+.pillars p { margin-top: 10px; max-width: 24ch; color: var(--sub); font-size: .95rem; }
+.pillars .pl-choc { --bg: var(--choc); --fg: var(--cream); --sub: #D9C3BA; --h: var(--pink); }
+.pillars .pl-taupe { --bg: var(--taupe); --sub: #4A3430; }
+.pillars .pl-rose { --bg: var(--rose); }
 
 /* Offer cards */
 .offer { padding: clamp(60px, 7vw, 100px) clamp(20px, 5vw, 70px); }
@@ -318,6 +321,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .pr-img { display: none; }
   .pcards { grid-template-columns: 1fr 1fr; }
   .pillars { grid-template-columns: 1fr; }
+  .pillars li { min-height: 0; padding: 36px 24px 32px; border-radius: 200px 200px var(--r) var(--r); }
   .reviews { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
   .reviews .actions { justify-content: center; }
   .rev-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(82%, 320px); overflow-x: auto; justify-self: stretch; text-align: left; }
@@ -332,7 +336,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .pcards, .fgrid { grid-template-columns: 1fr; }
   .hero .actions .pill { flex: 1 1 auto; }
   .hero-img figcaption { left: 8px; bottom: 14px; }
-  .lv-1, .lv-3 { right: -10px; width: 100px; height: 134px; }
+  .lv-1 { right: -10px; width: 100px; height: 134px; }
   .lv-2 { display: none; }
   .facts { grid-template-columns: 1fr; }
   .dock { position: fixed; z-index: 50; left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; border-radius: 22px; background: rgb(248 240 232 / .96); box-shadow: 0 12px 30px -10px rgb(46 29 26 / .5); transform: translateY(140%); transition: transform .45s var(--ease); }
@@ -364,21 +368,19 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 img.lav { height: auto; filter: drop-shadow(0 14px 16px rgb(46 29 26 / .22)); }
 img.lv-1 { width: 440px; right: -150px; top: -70px; rotate: -24deg; }
 img.lv-2 { width: 250px; left: -110px; bottom: 40px; rotate: 160deg; }
-img.lv-3 { width: 300px; right: -120px; top: -70px; rotate: -30deg; }
-@media (max-width: 900px) { img.lv-1, img.lv-3 { width: 220px; right: -60px; top: -40px; height: auto; } }
-.hero-img img.lav, .intro-img img.lav { position: absolute; z-index: 0; aspect-ratio: auto; object-fit: fill; border-radius: 0; box-shadow: none; transform: none; }
+@media (max-width: 900px) { img.lv-1 { width: 220px; right: -60px; top: -40px; height: auto; } }
+.hero-img img.lav { position: absolute; z-index: 0; aspect-ratio: auto; object-fit: fill; border-radius: 0; box-shadow: none; transform: none; }
 
 /* Layout fixes: lilac stays inside the rounded page, larger tap targets */
 img.lv-1 { width: 400px; right: -56px; top: -46px; }
-img.lv-3 { width: 280px; right: -56px; top: -50px; }
 img.lv-2 { left: -60px; }
 @media (max-width: 900px) {
-  img.lv-1, img.lv-3 { width: 190px; right: -12px; top: -34px; }
+  img.lv-1 { width: 190px; right: -12px; top: -34px; }
   .hero-proof, .facts a { display: inline-flex; align-items: center; min-height: 44px; }
   .phones a { display: inline-flex; align-items: center; min-height: 44px; }
 }
-img.lv-1 { right: -40px; } img.lv-3 { right: -44px; }
-@media (max-width: 900px) { img.lv-1, img.lv-3 { right: -2px; } img.lv-2 { left: -16px; } }
+img.lv-1 { right: -40px; }
+@media (max-width: 900px) { img.lv-1 { right: -2px; } img.lv-2 { left: -16px; } }
 @media (max-width: 640px) { .ab-badge { right: 12px; top: 14px; width: 104px; } .ab-badge b { font-size: 2rem; } }
 
 /* Phone numbers never break across lines */

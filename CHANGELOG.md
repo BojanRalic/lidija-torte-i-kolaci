@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 (07.10.2026)
+
+V2 „Slatki trenuci“:
+- Sklonjeno lila cveće iza fotografije u sekciji „Svaka torta je napravljena za vas“.
+- Tri kartice ispod („Belgijska čokolada“, „Domaće voće“, „Ukras rađen rukom“) su sada lukovi kao naslovna fotografija, u čokoladnoj, bež i rozoj boji iz palete stranice, sa tankim unutrašnjim okvirom, ikonicom u krem krugu i rednim brojem.
+
 ## v0.3.1 (07.10.2026)
 
 - Nova fotografija za „Rođendanske torte“ u V1, V2 i V3: roze torta sa siluetom princeze, leptirima i natpisom Happy Birthday, po izboru radionice. Glavna stranica ima zajedničku karticu „Rođendanske i dečje“ i ona ostaje sa fotografijom dečje torte.
