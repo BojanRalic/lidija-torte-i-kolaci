@@ -25,6 +25,7 @@ U `verzije/` su tri kompletne home stranice, svaka po jednoj Pinterest referenci
 - `verzije/v3-rukom-pravljeno/`: krem papir, žalfija i pocepane ivice, okrugle fotografije, crtane ikonice.
 - [ ] Klijent bira pravac (postojeći `index.html` ili jedna od tri verzije); ostale idu u Trash.
 - Pregled za klijenta: https://bojanralic.github.io/lidija-torte-i-kolaci/ (GitHub Pages, javni repo `BojanRalic/lidija-torte-i-kolaci`). Meni „Verzije“ u zaglavlju vodi na sve četiri stranice.
+- [ ] Pre objave: navesti autore fotografija iz `assets/deco/SOURCES.md` (CC BY-SA traži atribuciju), npr. jedan red „Izvori fotografija“ u futeru.
 - [ ] Pri objavi na domenu: obrisati `assets/verzije.css`, blok `.vsw` iz zaglavlja i deo „Version switcher“ na kraju `main.js`.
 - [ ] Pri objavi na domenu: u `index.html` vratiti `robots` na `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1` (sada je `noindex` zbog pregleda na github.io).
 

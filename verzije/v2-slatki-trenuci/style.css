@@ -358,3 +358,11 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .calc { margin: 0 12px; padding: 30px 20px; }
   .calc-price { white-space: nowrap; font-size: clamp(1.4rem, 7vw, 1.7rem); }
 }
+
+/* Real lilac (photo cut-outs) behind the photos, as in the reference */
+img.lav { height: auto; filter: drop-shadow(0 14px 16px rgb(46 29 26 / .22)); }
+img.lv-1 { width: 440px; right: -150px; top: -70px; rotate: -24deg; }
+img.lv-2 { width: 250px; left: -110px; bottom: 40px; rotate: 160deg; }
+img.lv-3 { width: 300px; right: -120px; top: -70px; rotate: -30deg; }
+@media (max-width: 900px) { img.lv-1, img.lv-3 { width: 220px; right: -60px; top: -40px; height: auto; } }
+.hero-img img.lav, .intro-img img.lav { position: absolute; z-index: 0; aspect-ratio: auto; object-fit: fill; border-radius: 0; box-shadow: none; transform: none; }

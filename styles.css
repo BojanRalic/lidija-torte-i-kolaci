@@ -1056,3 +1056,44 @@ a.rev-name:hover { text-decoration: underline; text-decoration-thickness: 2px; }
   .l4-pol { position: relative; left: auto; bottom: auto; width: 60%; margin: 20px auto 0; }
 }
 @media (max-width: 640px) { .p1-top { padding-top: 10px; } }
+
+/* ================= Real materials: photo and rendered textures instead of flat drawings ================= */
+/* Glossy glaze drips (rendered with light and shadow) */
+img.drip-edge { display: block; height: max(63px, 7.08vw); object-fit: cover; object-position: 50% 0; }
+.flavours img.drip-bottom { height: max(79px, 9.07vw); }
+img.drip { display: block; height: 79px; object-fit: fill; }
+img.cm-drip { height: 38px; object-fit: fill; }
+
+/* Photo satin bow and satin ribbons on the box */
+img.bow { top: 26%; left: 47%; filter: drop-shadow(0 8px 8px rgb(116 46 78 / .3)); opacity: 0; transform: translateY(-40px) rotate(10deg) scale(1.1); transition: opacity .45s .9s, transform .9s var(--ease) .55s; }
+.js .intro img.bow { opacity: 1; transform: none; }
+img.lid-bow { width: 30%; right: -2%; top: -9%; }
+.ribbon-v { background: url("assets/deco/satin-v.webp") 50% 0 / 100% auto repeat-y; }
+.ribbon-h { background: url("assets/deco/satin-h.webp") 0 50% / auto 100% repeat-x; }
+.band { background: url("assets/deco/satin-h.webp") 0 50% / auto 100% repeat-x; }
+
+/* Washi tape: translucent fibre paper with hand-torn ends */
+.tape, .slip .tape { -webkit-mask: none; mask: none; background: url("assets/deco/tape-pink.webp") center / 100% 100% no-repeat; width: 100px; height: 34px; }
+.tape.t-r, .rev-note:nth-child(even) .tape { background-image: url("assets/deco/tape-yellow.webp"); }
+.slip .tape { background-image: url("assets/deco/tape-blue.webp"); width: 84px; height: 30px; }
+.l4-pol .tape { width: 80px; }
+
+/* Paper doily */
+.doily, .seal-doily { background-image: url("assets/deco/doily.webp"); filter: none; }
+
+/* Woven gingham tablecloth */
+.v-l4 { background: #FFFAFB url("assets/deco/gingham.webp") 0 0 / 224px 224px; }
+
+/* Order line: jute twine and small satin bows */
+.p1-item::before { width: 4px; margin-left: -2px; background: url("assets/deco/twine.webp") 50% 0 / 4px 38px repeat-y; }
+.p1-bow { position: absolute; z-index: 1; width: 74px; height: auto; translate: -50% -38%; rotate: var(--r); filter: drop-shadow(0 4px 4px rgb(116 46 78 / .3)); pointer-events: none; }
+.p1-line .p1-bow { left: var(--x); top: var(--y); }
+@media (max-width: 900px) { .p1-bow { display: none; } .p1-line::before { background: url("assets/deco/satin-v.webp") 50% 0 / 100% auto repeat-y; } }
+
+/* Paper grain on every card that stands in for paper */
+.print, .menu-paper, .qa-list, .postcard, .slip, .receipt, .p1-tag, .gift-tag, .rev-note, .l4-pol, .lid {
+  background-image: url("assets/deco/grain.webp") !important; background-size: 160px !important;
+}
+.postcard::before { background: url("assets/deco/grain.webp") 0 0 / 160px, repeating-linear-gradient(-45deg, var(--pink-deep) 0 16px, var(--board) 16px 26px, var(--sky) 26px 42px, var(--board) 42px 52px); }
+img.p1-ribbon { object-fit: fill; filter: none; }
+.p1-item::after { background: url("assets/deco/bow.webp") center / contain no-repeat; width: 48px; height: 34px; margin-left: -24px; filter: drop-shadow(0 2px 2px rgb(116 46 78 / .3)); }

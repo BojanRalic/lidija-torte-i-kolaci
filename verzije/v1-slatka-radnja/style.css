@@ -360,3 +360,22 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .facts { flex-direction: column; align-items: flex-start; max-width: 340px; margin-inline: auto; text-align: left; }
   .brand small { display: none; }
 }
+
+/* Real gypsophila and blueberries (photo cut-outs) instead of drawn sprigs and dots */
+img.sprig { width: 210px; height: auto; color: inherit; }
+.sp-hero-l { left: 2%; top: 10px; rotate: 170deg; scale: -1 1; width: 190px; }
+.sp-hero-r { right: 2%; top: 30px; rotate: 196deg; scale: 1; width: 240px; }
+.sp-m1 { left: 1%; bottom: -10px; rotate: -12deg; width: 230px; }
+.sp-m2 { right: 1%; bottom: -10px; scale: -1 1; rotate: 10deg; width: 190px; }
+.sp-foot { width: 130px; opacity: .85; }
+img.berries { width: 96px; height: auto; }
+.b-hero { left: 13%; top: 270px; rotate: -20deg; }
+.b-m { width: 84px; rotate: 70deg; }
+img.b-about { width: 70px; height: auto; rotate: 90deg; transform-origin: 50% 50%; margin: 0 0 -10px 30px; }
+@media (max-width: 900px) { img.sprig.sp-hero-l, img.sprig.sp-hero-r { width: 110px; } }
+img.berries { width: 150px; }
+.b-hero { left: 10%; top: 250px; rotate: 0deg; }
+.b-m { width: 120px; rotate: 0deg; bottom: 6px; }
+img.b-about { width: 130px; rotate: 0deg; margin: 0 0 6px 0; }
+.sp-m1 { left: -3%; bottom: -30px; width: 180px; }
+.sp-m2 { right: -3%; bottom: -30px; width: 160px; }
