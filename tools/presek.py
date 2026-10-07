@@ -7,7 +7,7 @@
 # Run: python3 tools/presek.py
 import math, random, re, pathlib
 
-PAGE = pathlib.Path(__file__).resolve().parent.parent / "verzije/v2-slatki-trenuci/index.html"
+PAGE = pathlib.Path(__file__).resolve().parent.parent / "index.html"
 rnd = random.Random(11)
 f = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
 

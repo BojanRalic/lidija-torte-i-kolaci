@@ -1,12 +1,11 @@
-# Draws the tiered cake for the "Koliko torte" calculator and writes it into all four pages.
+# Draws the tiered cake for the "Koliko torte" calculator and writes it into the site page.
 # Style follows the client's reference illustration: pink tiers, twisted rope piping,
 # white swags with blue flowers, polka dots, strawberries and a bunting topper on a lilac stand.
 # Run: python3 tools/torta.py  (then copy the printed TOPS/HEAD into main.js if tier sizes change)
 import math, re, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-PAGES = ["index.html", "verzije/v1-slatka-radnja/index.html",
-         "verzije/v2-slatki-trenuci/index.html", "verzije/v3-rukom-pravljeno/index.html"]
+PAGES = ["index.html"]  # the archived designs in arhiva/ keep the cake they were built with
 CX, YB, K, H = 200, 402, 0.16, 512           # centre x, cake base y, ellipse squash, viewBox height
 TIERS = [(280, 92), (212, 80), (148, 70), (94, 58)]
 WORD = "ŽIVELI"

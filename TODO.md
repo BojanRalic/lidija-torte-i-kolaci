@@ -17,16 +17,14 @@
 - [ ] Poruke zahvalnosti mušterija (sa imenom i mestom) za sekciju utisaka.
 - [x] Izabrane varijante: „Kako se poručuje“ P1 (satenska traka), „Lidija i Milan“ L4 (presek torte) na kariranom stolnjaku. Preneto u `index.html`.
 
-## Tri nove verzije dizajna (07.10.2026)
+## Izabran dizajn: V2 „Slatki trenuci“ (07.10.2026)
 
-U `verzije/` su tri kompletne home stranice, svaka po jednoj Pinterest referenci iz upitnika. Sve su ocenjene 9,5/10. Imaju `noindex` i ne ulaze u sitemap.
-- `verzije/v1-slatka-radnja/`: prozračan beli urednički stil, skript naslovi, karusel ponude.
-- `verzije/v2-slatki-trenuci/`: mauve okvir, zaobljeni krem paneli, serif, čokoladna i roze dugmad.
-- `verzije/v3-rukom-pravljeno/`: krem papir, žalfija i pocepane ivice, okrugle fotografije, crtane ikonice.
-- [ ] Klijent bira pravac (postojeći `index.html` ili jedna od tri verzije); ostale idu u Trash.
-- Pregled za klijenta: https://bojanralic.github.io/lidija-torte-i-kolaci/ (GitHub Pages, javni repo `BojanRalic/lidija-torte-i-kolaci`). Meni „Verzije“ u zaglavlju vodi na sve četiri stranice.
+V2 je sada jedini sajt: `index.html` i `style.css` u korenu. Meni „Verzije“ je uklonjen sa sajta.
+Ostale tri verzije su u `arhiva/` (`glavna/`, `v1-slatka-radnja/`, `v3-rukom-pravljeno/`), sa `noindex`, van sitemap-a. Rade i dalje i imaju svoj meni „Verzije“ koji vodi kroz arhivu i nazad na sajt.
+- `arhiva/glavna/DESIGN.md` opisuje staru glavnu verziju. Za V2 još ne postoji DESIGN.md.
+- Pregled: https://bojanralic.github.io/lidija-torte-i-kolaci/ (sajt) i https://bojanralic.github.io/lidija-torte-i-kolaci/arhiva/glavna/ (arhiva).
 - [ ] Pre objave: navesti autore fotografija iz `assets/deco/SOURCES.md` (CC BY-SA traži atribuciju), npr. jedan red „Izvori fotografija“ u futeru.
-- [ ] Pri objavi na domenu: obrisati `assets/verzije.css`, blok `.vsw` iz zaglavlja i deo „Version switcher“ na kraju `main.js`.
+- [ ] Pri objavi na domenu: ne objavljivati `arhiva/` ni `assets/verzije.css`; deo „Version switcher“ u `main.js` koristi samo arhiva.
 - [ ] Pri objavi na domenu: u `index.html` vratiti `robots` na `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1` (sada je `noindex` zbog pregleda na github.io).
 
 ## Google recenzije uživo
@@ -42,7 +40,7 @@ Sekcija „Slatke reči sa Google mape“ je gotova (`index.html#recenzije`, `fu
 ## Tehničko
 
 - [ ] Self-hostovati fontove umesto Google Fonts (brzina, privatnost).
-- [ ] Domen (predlozi klijenta: lidijatorteikolaci.rs, torteleskovac.rs) i Cloudflare Pages. Objavljivati iz posebnog foldera (bez `.impeccable/`, `~resources/`, `tools/`, `dev/`), a `functions/` ostaje u korenu projekta.
+- [ ] Domen (predlozi klijenta: lidijatorteikolaci.rs, torteleskovac.rs) i Cloudflare Pages. Objavljivati iz posebnog foldera (bez `.impeccable/`, `~resources/`, `tools/`, `dev/`, `arhiva/`), a `functions/` ostaje u korenu projekta.
 - [ ] Google Analytics 4 i Search Console.
 - [ ] Admin za galeriju (Cloudflare Pages Functions + R2) i automatski Instagram feed.
 - [ ] Ostale stranice: vidi „SEO plan“ ispod.

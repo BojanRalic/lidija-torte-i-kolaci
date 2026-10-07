@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.6.0 (07.10.2026)
+
+V2 „Slatki trenuci“ je sada jedini sajt:
+- V2 je prebačen u koren projekta (`index.html`, `style.css`) i otvara se na glavnoj adresi.
+- Uklonjen je meni „Verzije“ iz zaglavlja.
+- Sajt je preuzeo SEO zaglavlje stare glavne verzije: naslov, opis, canonical, Open Graph i JSON-LD (Bakery sa cenama i oblastima dostave). Dodat je preload naslovne fotografije.
+- Stara glavna verzija, V1 i V3 su premeštene u `arhiva/` i i dalje rade. Njihov meni „Verzije“ sada vodi kroz arhivu i nazad na sajt. Sve imaju `noindex`.
+- Stranica 404 koristi fontove i stil V2.
+- `tools/torta.py` i `tools/presek.py` sada pišu samo u `index.html`. Arhiva zadržava svoje crteže.
+- `DESIGN.md` stare glavne verzije je premešten u `arhiva/glavna/`.
+
 ## v0.5.4 (07.10.2026)
 
 V2 „Slatki trenuci“, mapa dostave:
