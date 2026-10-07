@@ -332,11 +332,11 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .map .t-note { font: 600 11px var(--sans); letter-spacing: .14em; fill: var(--soft); }
 .map .home-t { font: italic 400 30px var(--serif); fill: var(--berry); }
 .map .t-free { font: 700 13px var(--sans); letter-spacing: .16em; fill: #2F7A4B; }
+.map :is(.home-t, .t-free) { paint-order: stroke; stroke: var(--rose-2); stroke-width: 6px; stroke-linejoin: round; }
 .map .river { fill: none; stroke: #CBD3EC; stroke-width: 8; stroke-linecap: round; }
 .map .river-t { font: italic 400 14px var(--serif); fill: #6F7FB0; }
 .map .road { fill: none; stroke: var(--taupe); stroke-width: 2.4; stroke-dasharray: 1 8; stroke-linecap: round; }
 .map .route { fill: none; stroke: var(--berry); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.map .arr { fill: none; stroke: var(--taupe); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
 .map .dot, .map .ripple, .map .pulse { transform-box: fill-box; transform-origin: center; }
 .map .box-lid { transform-box: fill-box; transform-origin: 50% 100%; }
 .map .ripple { fill: none; stroke: var(--berry); stroke-width: 2; opacity: 0; }
@@ -361,8 +361,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .map-card:hover .route { stroke-dashoffset: 0; transition: stroke-dashoffset .9s var(--ease) calc(var(--i) * .12s); }
   .map-card:hover .dot { animation: dv-pop .6s var(--ease) calc(var(--i) * .12s + .7s) both; }
   .map-card:hover .ripple { animation: dv-ripple 1s ease-out calc(var(--i) * .12s + .7s) both; }
-  .map-card:hover :is(.town, .far-arrow) text:not(.t-note) { fill: var(--berry); transition-delay: calc(var(--i) * .12s + .7s); }
-  .map-card:hover .arr { stroke: var(--berry); transition-delay: calc(var(--i) * .12s + .7s); }
+  .map-card:hover .town text:not(.t-note) { fill: var(--berry); transition-delay: calc(var(--i) * .12s + .7s); }
   .map-card:hover .box-lid { animation: dv-lid .9s var(--ease); }
 }
 @media (hover: none) {

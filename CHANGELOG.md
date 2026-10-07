@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.5.4 (07.10.2026)
+
+V2 „Slatki trenuci“, mapa dostave:
+- Niš i Vranje sada imaju kružić na kraju linije, kao i ostali gradovi, sa istim talasom i iskakanjem na hover. Strelice su uklonjene.
+- Natpis „Lebane“ je pomeren ispod kružića, pa linija više ne prelazi preko teksta.
+- Natpisi „Leskovac“ i „Besplatno“ su pomereni desno gore od poklona, pa ih linije više ne seku. Imaju tanku podlogu u boji kartice, da ostanu čitki i kad su blizu reke.
+
 ## v0.5.3 (07.10.2026)
 
 V2 „Slatki trenuci“, sekcija „Dostava torti u Leskovcu i okolini“:
