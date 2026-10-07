@@ -1,9 +1,9 @@
 # Draws the exploded cake slice for the V2 "Lidija i Milan" section and writes it into the page.
 # A wedge cut from a round cake, seen from above and in front: the tip points right, the cut face
-# shows toward the viewer and the frosted outer crust curves away on the left. Every layer is its own
-# 3D piece hovering a little above the one below, the way an exploded drawing shows a cake:
+# shows toward the viewer and the outer crust curves away on the left. Every layer is its own 3D piece,
+# stacked straight on the one below, so each can drop in on its own:
 # chocolate biscuit base, cooked vanilla custard, chocolate sponge, cream with cut raspberries,
-# vanilla sponge, Belgian chocolate ganache with drips, and fresh decorations floating on top.
+# vanilla sponge, Belgian chocolate ganache with drips, and fresh decorations on top.
 # Run: python3 tools/presek.py
 import math, random, re, pathlib
 
@@ -11,20 +11,19 @@ PAGE = pathlib.Path(__file__).resolve().parent.parent / "verzije/v2-slatki-trenu
 rnd = random.Random(11)
 f = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
 
-R = 300                    # cake radius: the wedge's cut faces are R long
+R = 370                    # cake radius: the wedge's cut faces are R long
 TA, TB = 160, 202          # plan angles of the front cut face and the hidden back cut face
 PITCH = math.radians(24)   # how far we look down at the slice
 CP, SP = math.cos(PITCH), math.sin(PITCH)
-GAP = 46                   # air between exploded layers
 OX, OY = R / 2, 470        # screen position of the tip at height 0
 
 LAYERS = [                 # bottom to top: (name, height, key shared with its label)
-    ("base", 28, "k-ruke"),
-    ("fil", 24, "k-fil"),
-    ("choc", 52, "k-kore"),
-    ("voce", 42, "k-voce"),
-    ("van", 52, "k-kore"),
-    ("ganache", 16, "k-cok"),
+    ("base", 44, "k-ruke"),
+    ("fil", 36, "k-fil"),
+    ("choc", 80, "k-kore"),
+    ("voce", 66, "k-voce"),
+    ("van", 80, "k-kore"),
+    ("ganache", 24, "k-cok"),
 ]
 LABELS = {                 # key: (text, side, plan fraction from the tip toward the crust)
     "k-ukras": ("ukrasi rađeni rukom", -1, None),
@@ -135,16 +134,13 @@ def layer(name, y0, y1):
            f'<polygon points="{pts(front)}" fill="{cut_f}"/>']
     h = y1 - y0
     if name == "voce":
-        # cream with halved raspberries pressed into the cut face and whole ones showing on top
+        # cream with halved raspberries pressed into the cut face and the crust
         for t in (.12, .33, .55, .77):
             x, y = on_front(t, y0 + h / 2)
             out.append(half_berry(x, y + 1, .95))
         for x, z in [plan(170, R * .97), plan(176, R * .97)]:
             sx, sy = scr(x, z, y0 + h / 2)
             out.append(half_berry(sx, sy + 1, .9, .45))
-        for tt, rr in [(166, .78), (188, .82), (204, .7), (176, .5), (196, .42), (184, .22)]:
-            sx, sy = scr(*plan(tt, R * rr), y1)
-            out.append(f'<g transform="translate({f(sx)} {f(sy)}) scale(1 {f(CP)})">{raspberry(0, 0, .62)}</g>')
     elif name == "fil":
         # cooked custard: wavy edges and a ribbon of raspberry jam folded through
         wave = " ".join(f"L{f(x)},{f(y + 2.2 * math.sin(i * 1.3))}" for i, (x, y) in enumerate(on_front(i / 24, y0 + h * .55) for i in range(25)))
@@ -202,11 +198,11 @@ def build():
         spans.setdefault(key, (y, y + h))
         if name == "van":
             spans[key] = (y, y + h)       # the label points at the upper sponge
-        y += h + GAP
-    top = y - GAP
+        y += h
+    top = y
 
-    # decorations floating above the ganache, like fruit dropped onto an exploded drawing
-    fy = top + GAP * 1.2
+    # decorations sitting on the ganache
+    fy = top
     deco = []
     for th, rr, s in [(194, .66, 1.7), (180, .34, 1.3)]:
         x, yy = scr(*plan(th, R * rr), fy)
@@ -222,8 +218,8 @@ def build():
     deco.append(raspberry(big[0], big[1] - 34, 2.1))
     small = scr(*plan(180, R * .34), fy)
     deco.append(raspberry(small[0], small[1] - 26, 1.6))
-    fly = scr(*plan(168, R * .5), fy + 90)
-    deco.append(f'<g transform="rotate(18 {f(fly[0])} {f(fly[1])})">{raspberry(*fly, 1.7)}</g>')
+    third = scr(*plan(170, R * .62), fy)
+    deco.append(raspberry(third[0], third[1] - 14, 1.3))
     g.append(f'<g class="ps-layer k-ukras" style="--d:{len(LAYERS) + 1}">{"".join(deco)}</g>')
 
     # labels left and right of the stack, joined to their layer by a straight hairline
@@ -243,7 +239,7 @@ def build():
                    f'<circle cx="{f(tx)}" cy="{f(ty)}" r="3.2"/><path d="M{f(tx)},{f(ty)} H{f(lx - 8 * side)}"/>'
                    f'<text x="{f(lx)}" y="{f(ty + 7)}" text-anchor="{anchor}">{text}</text></g>')
     g.append(f'<g class="ps-labels">{"".join(lab)}</g>')
-    y_top, y_bot = fly[1] - 40, sy + 34 + R * .16
+    y_top, y_bot = big[1] - 90, sy + 34 + R * .16
     return f'<svg viewBox="-520 {f(y_top)} 1040 {f(y_bot - y_top)}" aria-hidden="true" class="ps-svg">{"".join(g)}</svg>'
 
 

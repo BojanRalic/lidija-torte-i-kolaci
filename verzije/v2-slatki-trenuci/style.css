@@ -264,38 +264,39 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .ps-lab text { font: italic 400 23px var(--serif); fill: color-mix(in srgb, var(--berry) calc(var(--on) * 100%), var(--ink)); transition: fill .3s; }
 .ps-lab { transition: opacity .35s; }
 .ps-legend { display: none; }
-.js .ab-slice .ps-layer { opacity: 0; translate: 0 -110px; transition: opacity .4s var(--dl), translate .8s var(--ease) var(--dl), transform .45s var(--ease), filter .45s; }
+.js .ab-slice .ps-layer { opacity: 0; translate: 0 -110px; transition: opacity .4s var(--dl), translate .8s var(--ease) var(--dl), filter .45s; }
 .js .ab-slice.in .ps-layer { opacity: 1; translate: 0 0; }
 .ab-slice:hover .ps-layer, .ab-slice:focus-within .ps-layer { --dl: 0s; }
+@keyframes ps-glow { 0%, 100% { filter: brightness(1.04) drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px rgb(163 68 95 / .55)); } 50% { filter: brightness(1.12) drop-shadow(0 0 3px #fff) drop-shadow(0 0 16px rgb(163 68 95 / .8)); } }
 .js .ab-slice .ps-labels { opacity: 0; transition: opacity .8s 1.3s; }
 .js .ab-slice.in .ps-labels { opacity: 1; }
 .ab-slice:has(.k-ukras:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-ukras) { opacity: .3; }
 .ab-slice:has(.k-ukras:is(:hover, :focus-visible)) .ps-layer:not(.k-ukras) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-ukras:is(:hover, :focus-visible)) .ps-layer.k-ukras { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-ukras:is(:hover, :focus-visible)) .ps-layer.k-ukras { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-ukras:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-ukras { --on: 1; }
 .ab-slice:has(.k-cok:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-cok) { opacity: .3; }
 .ab-slice:has(.k-cok:is(:hover, :focus-visible)) .ps-layer:not(.k-cok) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-cok:is(:hover, :focus-visible)) .ps-layer.k-cok { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-cok:is(:hover, :focus-visible)) .ps-layer.k-cok { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-cok:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-cok { --on: 1; }
 .ab-slice:has(.k-kore:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-kore) { opacity: .3; }
 .ab-slice:has(.k-kore:is(:hover, :focus-visible)) .ps-layer:not(.k-kore) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-kore:is(:hover, :focus-visible)) .ps-layer.k-kore { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-kore:is(:hover, :focus-visible)) .ps-layer.k-kore { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-kore:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-kore { --on: 1; }
 .ab-slice:has(.k-fil:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-fil) { opacity: .3; }
 .ab-slice:has(.k-fil:is(:hover, :focus-visible)) .ps-layer:not(.k-fil) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-fil:is(:hover, :focus-visible)) .ps-layer.k-fil { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-fil:is(:hover, :focus-visible)) .ps-layer.k-fil { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-fil:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-fil { --on: 1; }
 .ab-slice:has(.k-voce:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-voce) { opacity: .3; }
 .ab-slice:has(.k-voce:is(:hover, :focus-visible)) .ps-layer:not(.k-voce) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-voce:is(:hover, :focus-visible)) .ps-layer.k-voce { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-voce:is(:hover, :focus-visible)) .ps-layer.k-voce { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-voce:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-voce { --on: 1; }
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-ruke) { opacity: .3; }
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) .ps-layer:not(.k-ruke) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
-.ab-slice:has(.k-ruke:is(:hover, :focus-visible)) .ps-layer.k-ruke { transform: translateX(18px); filter: drop-shadow(0 10px 12px rgb(46 29 26 / .35)); }
+.ab-slice:has(.k-ruke:is(:hover, :focus-visible)) .ps-layer.k-ruke { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-ruke { --on: 1; }
 @media (max-width: 900px) {
   .ps-labels { display: none; }
-  .ps-svg { width: 270%; margin-left: -85%; }
+  .ps-svg { width: 236%; margin-left: -68%; }
   .ab-slice { overflow-x: clip; }
   .ps-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
   .ps-legend li { --on: 0; padding: 9px 14px; border-radius: 999px; background: color-mix(in srgb, var(--berry) calc(var(--on) * 100%), var(--cream)); color: color-mix(in srgb, #fff calc(var(--on) * 100%), var(--ink)); font: italic 400 1rem/1.1 var(--serif); cursor: pointer; transition: opacity .3s, background-color .3s; }

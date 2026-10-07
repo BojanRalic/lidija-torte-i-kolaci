@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.5.1 (07.10.2026)
+
+V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:
+- Slojevi parčeta su sada naslagani jedan na drugi, bez razmaka. Ukrasi stoje na ganašu, a parče je malo veće.
+- Na hover se slojevi više ne pomeraju. Izabrani sloj ostaje u boji i blago pulsira roze sjajem, a ostali posive.
+- Animacija slaganja kreće tek kada se vidi veći deo sekcije (oko 70%, ili 70% ekrana kada je sekcija viša od njega). To radi novi atribut `data-late` u `main.js`, koji ostale sekcije ne koriste.
+
 ## v0.5.0 (07.10.2026)
 
 V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:

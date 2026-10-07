@@ -65,7 +65,11 @@ if (motionOK && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver((es) => es.forEach((en) => {
     if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
   }), { rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal, .drip-edge, .drip').forEach((el) => io.observe(el));
+  // data-late waits until most of the element (or of the screen, if it is taller) shows.
+  const late = new IntersectionObserver((es) => es.forEach((en) => {
+    if (en.intersectionRect.height >= Math.min(en.boundingClientRect.height, innerHeight) * .7) { en.target.classList.add('in'); late.unobserve(en.target); }
+  }), { threshold: Array.from({ length: 21 }, (_, i) => i / 20) });
+  document.querySelectorAll('.reveal, .drip-edge, .drip').forEach((el) => (el.hasAttribute('data-late') ? late : io).observe(el));
 } else {
   document.querySelectorAll('.reveal, .drip-edge, .drip').forEach((el) => el.classList.add('in'));
 }
