@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0 (07.10.2026)
+
+V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:
+- Novo parče torte po uzoru na akvarel sa malinom: trouglasto parče sa vrhom udesno, rez okrenut ka posetiocu i kora koja se savija levo.
+- Slojevi stoje razmaknuti, kao na rastavljenom crtežu: čokoladni biskvit, kuvani vanila fil sa trakom džema od maline, čokoladna kora, krem sa prepolovljenim malinama, vanila kora i ganaš od belgijske čokolade sa curenjem i šarama od bele čokolade. Iznad lebde maline, ruže od šlaga, list nane, uvijutak bele čokolade i zlatne listiće.
+- Na ulazu slojevi padaju odozgo jedan po jedan, od dna ka vrhu, a ukrasi stižu poslednji.
+- Opisi su sada levo i desno od torte, spojeni ravnom linijom sa svojim slojem. Hover veza između sloja i opisa ostaje ista.
+
 ## v0.4.2 (07.10.2026)
 
 V2 „Slatki trenuci“:

@@ -1,54 +1,95 @@
-# Draws the detailed cake slice for the V2 "Lidija i Milan" section and writes it into the page.
-# A wedge seen from the front: the cut face shows every layer, the outer side is frosted with a
-# chocolate drip, the top carries piped rosettes, raspberries, blueberries, a chocolate shard,
-# mint and gold leaf, and the slice sits on a gold-rimmed plate with a fork.
+# Draws the exploded cake slice for the V2 "Lidija i Milan" section and writes it into the page.
+# A wedge cut from a round cake, seen from above and in front: the tip points right, the cut face
+# shows toward the viewer and the frosted outer crust curves away on the left. Every layer is its own
+# 3D piece hovering a little above the one below, the way an exploded drawing shows a cake:
+# chocolate biscuit base, cooked vanilla custard, chocolate sponge, cream with cut raspberries,
+# vanilla sponge, Belgian chocolate ganache with drips, and fresh decorations floating on top.
 # Run: python3 tools/presek.py
 import math, random, re, pathlib
 
 PAGE = pathlib.Path(__file__).resolve().parent.parent / "verzije/v2-slatki-trenuci/index.html"
-rnd = random.Random(7)
+rnd = random.Random(11)
 f = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
 
-X0, X1 = 230, 520          # cut face: crust side and tip
-BX, BY = 140, -62          # back crust corner offset (x, y shift)
-TOP, BOT = 170, 440
-LAYERS = [                 # (name, y0, y1, fill)
-    ("ganache", 170, 184, "#4A2A22"),
-    ("sponge", 184, 240, "url(#ps-van)"),
-    ("cream", 240, 258, "#FFF3E6"),
-    ("jam", 258, 272, "#B8274B"),
-    ("choc", 272, 330, "url(#ps-choc)"),
-    ("mousse", 330, 348, "#8A5544"),
-    ("sponge2", 348, 410, "url(#ps-van)"),
-    ("base", 410, 440, "url(#ps-base)"),
+R = 300                    # cake radius: the wedge's cut faces are R long
+TA, TB = 160, 202          # plan angles of the front cut face and the hidden back cut face
+PITCH = math.radians(24)   # how far we look down at the slice
+CP, SP = math.cos(PITCH), math.sin(PITCH)
+GAP = 46                   # air between exploded layers
+OX, OY = R / 2, 470        # screen position of the tip at height 0
+
+LAYERS = [                 # bottom to top: (name, height, key shared with its label)
+    ("base", 28, "k-ruke"),
+    ("fil", 24, "k-fil"),
+    ("choc", 52, "k-kore"),
+    ("voce", 42, "k-voce"),
+    ("van", 52, "k-kore"),
+    ("ganache", 16, "k-cok"),
 ]
-LABELS = [                 # (text, leader start x, y, label y, key shared with its layers)
-    ("ukrasi rađeni rukom", 250, 82, 64, "k-ukras"),
-    ("belgijska čokolada", 505, 177, 142, "k-cok"),
-    ("kore koje pečemo sami", 505, 212, 206, "k-kore"),
-    ("filovi koje kuvamo sami", 505, 249, 262, "k-fil"),
-    ("domaće voće", 505, 265, 318, "k-voce"),
-    ("i sve to rukom", 505, 425, 404, "k-ruke"),
-]
-KEYS = {"ganache": "k-cok", "sponge": "k-kore", "choc": "k-kore", "sponge2": "k-kore",
-        "cream": "k-fil", "mousse": "k-fil", "jam": "k-voce", "base": "k-ruke"}
+LABELS = {                 # key: (text, side, plan fraction from the tip toward the crust)
+    "k-ukras": ("ukrasi rađeni rukom", -1, None),
+    "k-cok": ("belgijska čokolada", 1, .16),
+    "k-kore": ("kore koje pečemo sami", -1, .9),
+    "k-voce": ("domaće voće", 1, .16),
+    "k-fil": ("filovi koje kuvamo sami", -1, .9),
+    "k-ruke": ("i sve to rukom", 1, .16),
+}
 
 
-def crumb(pid, base, light, dark, hole, n=26):
+def plan(theta, r=R):
+    a = math.radians(theta)
+    return r * math.cos(a), r * math.sin(a)
+
+
+def scr(x, z, y):
+    return OX + x, OY - y * CP + z * SP
+
+
+def pts(seq):
+    return " ".join(f"{f(x)},{f(y)}" for x, y in seq)
+
+
+ARC = [plan(t) for t in range(TA, TB + 1, 2)]
+SIDE = [plan(t) for t in range(TA, 181, 2)]    # the part of the crust that faces us
+A = ARC[0]
+
+
+def on_front(t, y):
+    """Screen point on the cut face, t from the tip (0) to the crust (1), at height y."""
+    return scr(A[0] * t, A[1] * t, y)
+
+
+def crumb(pid, base, light, dark, hole, n=26, size=48):
     dots = []
     for _ in range(n):
-        x, y, r = rnd.uniform(0, 48), rnd.uniform(0, 48), rnd.uniform(.7, 2.1)
+        x, y, r = rnd.uniform(0, size), rnd.uniform(0, size), rnd.uniform(.7, 2.1)
         dots.append(f'<circle cx="{f(x)}" cy="{f(y)}" r="{f(r)}" fill="{rnd.choice([light, dark, light])}"/>')
     for _ in range(4):
-        x, y = rnd.uniform(4, 44), rnd.uniform(4, 44)
+        x, y = rnd.uniform(4, size - 4), rnd.uniform(4, size - 4)
         rx, ry = rnd.uniform(1.6, 3.4), rnd.uniform(1, 2)
-        dots.append(f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(rx)}" ry="{f(ry)}" fill="{hole}"/><path d="M{f(x - rx)},{f(y + .4)} q{f(rx)},{f(ry * 1.4)} {f(2 * rx)},0" stroke="{light}" stroke-width=".7" fill="none"/>')
-    return f'<pattern id="{pid}" width="48" height="48" patternUnits="userSpaceOnUse"><rect width="48" height="48" fill="{base}"/>{"".join(dots)}</pattern>'
+        dots.append(f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(rx)}" ry="{f(ry)}" fill="{hole}"/>')
+    return f'<pattern id="{pid}" width="{size}" height="{size}" patternUnits="userSpaceOnUse"><rect width="{size}" height="{size}" fill="{base}"/>{"".join(dots)}</pattern>'
 
 
-def wavy(y, amp, x0=X0, x1=X1, step=14):
-    pts = [(x, y + amp * math.sin(x / 9 + y)) for x in range(x0, x1 + 1, step)]
-    return " L".join(f"{f(x)},{f(yy)}" for x, yy in pts)
+def specks(pid, base, dot, n=30, size=40):
+    d = "".join(f'<ellipse cx="{f(rnd.uniform(0, size))}" cy="{f(rnd.uniform(0, size))}" rx="{f(rnd.uniform(.4, 1.1))}" ry=".5" fill="{dot}"/>' for _ in range(n))
+    return f'<pattern id="{pid}" width="{size}" height="{size}" patternUnits="userSpaceOnUse"><rect width="{size}" height="{size}" fill="{base}"/>{d}</pattern>'
+
+
+def grad(gid, stops, x2=1, y2=0):
+    s = "".join(f'<stop offset="{o}" stop-color="{c}"/>' for o, c in stops)
+    return f'<linearGradient id="{gid}" x1="0" y1="0" x2="{x2}" y2="{y2}">{s}</linearGradient>'
+
+
+# material per layer: (top, cut face, crust side)
+MAT = {
+    "base": ("url(#ps-base)", "url(#ps-base)", "url(#ps-base-side)"),
+    "fil": ("url(#ps-custard)", "url(#ps-custard)", "url(#ps-custard-side)"),
+    "choc": ("url(#ps-choc)", "url(#ps-choc)", "url(#ps-choc-side)"),
+    "voce": ("#FFF6EE", "#FFF4EA", "url(#ps-cream-side)"),
+    "van": ("url(#ps-van)", "url(#ps-van)", "url(#ps-van-side)"),
+    "ganache": ("url(#ps-gloss)", "#4A2A22", "url(#ps-ganache-side)"),
+}
 
 
 def raspberry(x, y, s=1):
@@ -60,98 +101,150 @@ def raspberry(x, y, s=1):
     return "".join(out)
 
 
-def blueberry(x, y, r=8):
-    return (f'<circle cx="{f(x)}" cy="{f(y)}" r="{r}" fill="#36406E"/><circle cx="{f(x - r * .35)}" cy="{f(y - r * .35)}" r="{f(r * .45)}" fill="#5D6BA3" opacity=".7"/>'
-            f'<path d="M{f(x - 2.4)},{f(y - r + 2)} l2.4,2 l2.4,-2" stroke="#232845" stroke-width="1.4" fill="none" stroke-linecap="round"/>')
+def half_berry(x, y, s=1, sx=1):
+    """A raspberry cut in half: drupelet rim, pink flesh and the hollow core."""
+    rim = "".join(f'<circle cx="{f(x + 10 * s * sx * math.cos(a))}" cy="{f(y + 12 * s * math.sin(a))}" r="{f(3.4 * s)}" fill="#C42449"/>'
+                  for a in [i * math.pi / 7 for i in range(14)])
+    return (f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(11 * s * sx)}" ry="{f(13 * s)}" fill="#A3173A"/>{rim}'
+            f'<ellipse cx="{f(x)}" cy="{f(y)}" rx="{f(7 * s * sx)}" ry="{f(9 * s)}" fill="#E85C7A"/>'
+            f'<ellipse cx="{f(x)}" cy="{f(y + 1 * s)}" rx="{f(2.6 * s * sx)}" ry="{f(5.5 * s)}" fill="#FCE4E8"/>')
 
 
-def rosette(x, y, s=1, c="#F3B6C2", d="#DF8FA0"):
-    pet = "".join(f'<ellipse cx="{f(x + 9 * s * math.cos(a))}" cy="{f(y + 6 * s * math.sin(a))}" rx="{f(8 * s)}" ry="{f(6 * s)}" fill="{c}" stroke="{d}" stroke-width="1"/>'
+def rosette(x, y, s=1, c="#FFF7EE", d="#E9D3BF"):
+    pet = "".join(f'<ellipse cx="{f(x + 10 * s * math.cos(a))}" cy="{f(y + 6 * s * math.sin(a))}" rx="{f(8.5 * s)}" ry="{f(6.5 * s)}" fill="{c}" stroke="{d}" stroke-width="1"/>'
                   for a in [i * math.pi / 3.5 for i in range(7)])
-    return (f'<ellipse cx="{f(x)}" cy="{f(y + 6 * s)}" rx="{f(18 * s)}" ry="{f(7 * s)}" fill="#2E1A15" opacity=".35"/>{pet}'
-            f'<ellipse cx="{f(x)}" cy="{f(y - 2 * s)}" rx="{f(9 * s)}" ry="{f(7 * s)}" fill="{c}"/>'
-            f'<path d="M{f(x - 6 * s)},{f(y - 1 * s)} q{f(6 * s)},{f(-9 * s)} {f(11 * s)},{f(-1 * s)} q{f(-3 * s)},{f(6 * s)} {f(-9 * s)},{f(4 * s)}" stroke="{d}" stroke-width="1.4" fill="none" stroke-linecap="round"/>')
+    return (f'{pet}<ellipse cx="{f(x)}" cy="{f(y - 4 * s)}" rx="{f(10 * s)}" ry="{f(8 * s)}" fill="{c}" stroke="{d}" stroke-width="1"/>'
+            f'<path d="M{f(x - 7 * s)},{f(y - 3 * s)} q{f(7 * s)},{f(-12 * s)} {f(13 * s)},{f(-2 * s)} q{f(-3 * s)},{f(7 * s)} {f(-11 * s)},{f(5 * s)}" stroke="{d}" stroke-width="1.4" fill="none" stroke-linecap="round"/>'
+            f'<path d="M{f(x - 1 * s)},{f(y - 15 * s)} q{f(3 * s)},{f(5 * s)} {f(-1 * s)},{f(8 * s)}" stroke="{d}" stroke-width="1.2" fill="none" stroke-linecap="round"/>')
+
+
+def leaf(x, y, rot, s=1):
+    return (f'<g transform="translate({f(x)} {f(y)}) rotate({rot}) scale({s})"><path d="M0,0 q16,-18 40,-6 q-16,18 -40,6Z" fill="#5E9A55"/>'
+            f'<path d="M2,0 q18,-6 34,-6" stroke="#376B37" stroke-width="1.3" fill="none"/><path d="M14,-3 l5,-6 M22,-5 l5,-5 M14,-3 l6,4 M22,-5 l6,3" stroke="#376B37" stroke-width=".9"/></g>')
+
+
+def layer(name, y0, y1):
+    top_f, cut_f, side_f = MAT[name]
+    top = [scr(0, 0, y1)] + [scr(x, z, y1) for x, z in ARC]
+    front = [scr(0, 0, y1), scr(*A, y1), scr(*A, y0), scr(0, 0, y0)]
+    side = [scr(x, z, y1) for x, z in SIDE] + [scr(x, z, y0) for x, z in reversed(SIDE)]
+    out = [f'<polygon points="{pts(side)}" fill="{side_f}"/>',
+           f'<polygon points="{pts(side)}" fill="url(#ps-round)"/>',
+           f'<polygon points="{pts(top)}" fill="{top_f}"/>',
+           f'<polygon points="{pts(top)}" fill="url(#ps-light)"/>',
+           f'<polygon points="{pts(front)}" fill="{cut_f}"/>']
+    h = y1 - y0
+    if name == "voce":
+        # cream with halved raspberries pressed into the cut face and whole ones showing on top
+        for t in (.12, .33, .55, .77):
+            x, y = on_front(t, y0 + h / 2)
+            out.append(half_berry(x, y + 1, .95))
+        for x, z in [plan(170, R * .97), plan(176, R * .97)]:
+            sx, sy = scr(x, z, y0 + h / 2)
+            out.append(half_berry(sx, sy + 1, .9, .45))
+        for tt, rr in [(166, .78), (188, .82), (204, .7), (176, .5), (196, .42), (184, .22)]:
+            sx, sy = scr(*plan(tt, R * rr), y1)
+            out.append(f'<g transform="translate({f(sx)} {f(sy)}) scale(1 {f(CP)})">{raspberry(0, 0, .62)}</g>')
+    elif name == "fil":
+        # cooked custard: wavy edges and a ribbon of raspberry jam folded through
+        wave = " ".join(f"L{f(x)},{f(y + 2.2 * math.sin(i * 1.3))}" for i, (x, y) in enumerate(on_front(i / 24, y0 + h * .55) for i in range(25)))
+        x0, y0s = on_front(0, y0 + h * .55)
+        out.append(f'<path d="M{f(x0)},{f(y0s)} {wave}" stroke="#D44A6A" stroke-width="3.2" fill="none" stroke-linecap="round" opacity=".75"/>')
+    elif name == "ganache":
+        # white chocolate drizzle and a glossy streak on top, drips down the cut face and the crust
+        for k, (r0, r1) in enumerate([(.18, .9), (.3, .95), (.45, .97)]):
+            a0, a1 = plan(TA + 8 + k * 12, R * r0), plan(TA + 14 + k * 12, R * r1)
+            p0, p1 = scr(*a0, y1), scr(*a1, y1)
+            mx, my = (p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2 - 10
+            out.append(f'<path d="M{f(p0[0])},{f(p0[1])} Q{f(mx)},{f(my)} {f(p1[0])},{f(p1[1])}" stroke="#FFF4E8" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".9"/>')
+        g0, g1 = scr(*plan(186, R * .25), y1), scr(*plan(178, R * .75), y1)
+        out.append(f'<path d="M{f(g0[0])},{f(g0[1])} L{f(g1[0])},{f(g1[1])}" stroke="#A7776A" stroke-width="4" stroke-linecap="round" opacity=".5"/>')
+        drips = []
+        for t, L in [(.06, 18), (.17, 34), (.27, 14), (.38, 46), (.5, 22), (.6, 38), (.71, 16), (.82, 30), (.93, 20)]:
+            x, y = on_front(t, y0)
+            drips.append(f'<path d="M{f(x - 5)},{f(y - 2)} V{f(y + L)} a5 5 0 0 0 10 0 V{f(y - 2)}Z"/><ellipse cx="{f(x - 1.5)}" cy="{f(y + L - 2)}" rx="1.4" ry="3" fill="#8A5E50"/>')
+        for th, L in [(162, 26), (168, 12), (174, 34), (179, 18)]:
+            x, y = scr(*plan(th), y0)
+            drips.append(f'<path d="M{f(x - 4)},{f(y - 2)} V{f(y + L)} a4 4 0 0 0 8 0 V{f(y - 2)}Z"/>')
+        out.append(f'<g fill="#4A2A22">{"".join(drips)}</g>')
+    # edges: a soft highlight on the front top edge and a fine line down the crust corner
+    p, q = scr(0, 0, y1), scr(*A, y1)
+    out.append(f'<path d="M{f(p[0])},{f(p[1])} L{f(q[0])},{f(q[1])}" stroke="#fff" stroke-width="1.4" opacity=".5"/>')
+    c0, c1 = scr(*A, y1), scr(*A, y0)
+    out.append(f'<path d="M{f(c0[0])},{f(c0[1])} V{f(c1[1])}" stroke="#2E1A15" stroke-width="1.2" opacity=".18"/>')
+    return "".join(out)
 
 
 def build():
     defs = ("<defs>" + crumb("ps-van", "#F1C77E", "#F8DCA4", "#DDAA5E", "#C9914A")
             + crumb("ps-choc", "#6B3E2E", "#875240", "#55301F", "#3D2016")
-            + crumb("ps-base", "#C98E4E", "#E2B074", "#A86E35", "#8C5626", 34)
-            + '<linearGradient id="ps-side" x1="0" x2="1"><stop offset="0" stop-color="#E2AEB4"/><stop offset=".6" stop-color="#F2C9CD"/><stop offset="1" stop-color="#EDBEC3"/></linearGradient>'
-            + '<linearGradient id="ps-gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E4235"/><stop offset="1" stop-color="#3E231C"/></linearGradient>'
-            + '<linearGradient id="ps-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F2F0"/><stop offset=".5" stop-color="#BDB7B3"/><stop offset="1" stop-color="#E7E3E0"/></linearGradient>'
+            + crumb("ps-base", "#4E2C20", "#C98E4E", "#6E4232", "#2E1A15", 40)
+            + specks("ps-custard", "#F8E2B4", "#3A2418")
+            + grad("ps-van-side", [(0, "#B97A3B"), (1, "#E0A962")])
+            + grad("ps-choc-side", [(0, "#3A2016"), (1, "#5E3526")])
+            + grad("ps-base-side", [(0, "#2E1A15"), (1, "#4E2C20")])
+            + grad("ps-custard-side", [(0, "#E6C98E"), (1, "#F8E2B4")])
+            + grad("ps-cream-side", [(0, "#EBDACB"), (1, "#FFF4EA")])
+            + grad("ps-ganache-side", [(0, "#2C1712"), (1, "#4A2A22")])
+            + grad("ps-gloss", [(0, "#3E231C"), (.55, "#6E4235"), (1, "#4A2A22")])
+            + '<linearGradient id="ps-round" x1="0" x2="1"><stop offset="0" stop-color="#2E1A15" stop-opacity=".35"/><stop offset="1" stop-color="#2E1A15" stop-opacity="0"/></linearGradient>'
+            + '<linearGradient id="ps-light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity=".26"/></linearGradient>'
+            + '<radialGradient id="ps-shadow"><stop offset="0" stop-color="#7A2E45" stop-opacity=".28"/><stop offset="1" stop-color="#7A2E45" stop-opacity="0"/></radialGradient>'
             + "</defs>")
     g = [defs]
-    # plate with gold rim and a soft shadow
-    g.append('<g class="ps-plate"><ellipse cx="350" cy="462" rx="300" ry="56" fill="#2E1A15" opacity=".12"/>'
-             '<ellipse cx="345" cy="448" rx="300" ry="58" fill="#FFFDF8" stroke="#D9B26A" stroke-width="3"/>'
-             '<ellipse cx="345" cy="446" rx="232" ry="40" fill="none" stroke="#EFE3D3" stroke-width="2"/>'
-             '<path d="M84 470 q 30 18 120 26" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/>'
-             '<ellipse cx="350" cy="442" rx="190" ry="14" fill="#2E1A15" opacity=".14"/></g>')
-    # fork on the plate, drawn flat and turned
-    tines = "".join(f'<rect x="-86" y="{f(-11 + k * 6.4)}" width="46" height="3.6" rx="1.8"/>' for k in range(4))
-    g.append('<g class="ps-fork" transform="translate(560 482) rotate(-13)" fill="url(#ps-steel)" stroke="#A39C97" stroke-width=".8">'
-             f'{tines}<path d="M-44,-12 Q-14,-12 0,-3 L120,-4 q8,0 8,4 q0,4 -8,4 L0,3 Q-14,12 -44,12Z"/></g>')
-    # crumbs on the plate
-    g.append('<g class="ps-crumbs">' + "".join(f'<circle cx="{f(rnd.uniform(110, 600))}" cy="{f(rnd.uniform(456, 486))}" r="{f(rnd.uniform(1.2, 3))}" fill="{rnd.choice(["#DDAA5E", "#875240", "#F1C77E"])}"/>' for _ in range(16)) + "</g>")
+    # soft shadow on the table under the stack
+    sx, sy = scr(-R * .5, 0, 0)
+    g.append(f'<ellipse class="ps-shadow" cx="{f(sx)}" cy="{f(sy + 34)}" rx="{f(R * .72)}" ry="{f(R * .18)}" fill="url(#ps-shadow)"/>')
 
-    drips = [f"M{BX},{TOP + BY}"]
-    for i in range(7):
-        t0, t1 = i / 7, (i + 1) / 7
-        xa = BX + (X0 - BX) * t0; ya = TOP + BY - BY * t0
-        xm = BX + (X0 - BX) * (t0 + t1) / 2; ym = TOP + BY - BY * (t0 + t1) / 2
-        xb = BX + (X0 - BX) * t1; yb = TOP + BY - BY * t1
-        L = rnd.choice([18, 34, 52, 26, 64, 22])
-        drips.append(f"L{f(xm - 4)},{f(ym)} V{f(ym + L)} a4 4 0 0 0 8 0 V{f(ym + 2)} L{f(xb)},{f(yb)}")
-    drip = " ".join(drips) + f" V{TOP - 6} L{BX},{TOP + BY - 6}Z"
-    pearls = "".join(f'<circle cx="{f(BX + (X0 - BX) * t / 9)}" cy="{f(BOT + BY - BY * t / 9 - 3)}" r="5" fill="#FFF8F0" stroke="#E7D6C5" stroke-width=".8"/>' for t in range(10))
-    # Every layer is a solid wedge piece: frosted outer side, its own top face and the cut face.
-    # Drawn bottom to top, so while the slice assembles each piece already reads as 3D,
-    # and once stacked the upper pieces hide the lower tops.
-    def side(y0, y1):
-        return (f'<path d="M{BX},{f(y0 + BY)} Q{BX + 30},{f(y0 + BY / 2 + 6)} {X0},{y0} V{y1 + .6} '
-                f'Q{BX + 30},{f(y1 + .6 + BY / 2 + 6)} {BX},{f(y1 + .6 + BY)}Z" fill="url(#ps-side)"/>')
+    y, spans = 0, {}
+    for d, (name, h, key) in enumerate(LAYERS, 1):
+        g.append(f'<g class="ps-layer {key}" style="--d:{d}">{layer(name, y, y + h)}</g>')
+        spans.setdefault(key, (y, y + h))
+        if name == "van":
+            spans[key] = (y, y + h)       # the label points at the upper sponge
+        y += h + GAP
+    top = y - GAP
 
-    def top_face(y0, fill):
-        t = f"M{BX},{f(y0 + BY)} Q{BX + 30},{f(y0 + BY / 2 + 6)} {X0},{y0} L{X1},{y0}Z"
-        return f'<path d="{t}" fill="{fill}"/><path d="{t}" fill="#fff" opacity=".16"/><path d="M{X0},{y0} H{X1}" stroke="#fff" stroke-width="1.2" opacity=".45"/>'
+    # decorations floating above the ganache, like fruit dropped onto an exploded drawing
+    fy = top + GAP * 1.2
+    deco = []
+    for th, rr, s in [(194, .66, 1.7), (180, .34, 1.3)]:
+        x, yy = scr(*plan(th, R * rr), fy)
+        deco.append(rosette(x, yy, s))
+    mint = scr(*plan(200, R * .58), fy)
+    deco.append(leaf(mint[0] + 10, mint[1] - 16, -24, 1.5))
+    curl = scr(*plan(174, R * .82), fy)
+    deco.append(f'<g transform="translate({f(curl[0])} {f(curl[1])}) rotate(-12) scale(1.4)"><rect x="-26" y="-7" width="52" height="14" rx="7" fill="#F6E7D3"/>'
+                f'<path d="M-22,-3 H22 M-20,3 H18" stroke="#DCC3A6" stroke-width="1.4"/><ellipse cx="26" cy="0" rx="4" ry="7" fill="#E7D1B5"/></g>')
+    gold = "".join(f'<path d="M{f(x)},{f(yy)} l5,-3 l3,5 l-6,2Z" fill="#E0B44C"/>' for x, yy in [scr(*plan(th, R * rr), fy) for th, rr in [(188, .9), (170, .55), (204, .4), (192, .2)]])
+    deco.append(gold)
+    big = scr(*plan(194, R * .66), fy)
+    deco.append(raspberry(big[0], big[1] - 34, 2.1))
+    small = scr(*plan(180, R * .34), fy)
+    deco.append(raspberry(small[0], small[1] - 26, 1.6))
+    fly = scr(*plan(168, R * .5), fy + 90)
+    deco.append(f'<g transform="rotate(18 {f(fly[0])} {f(fly[1])})">{raspberry(*fly, 1.7)}</g>')
+    g.append(f'<g class="ps-layer k-ukras" style="--d:{len(LAYERS) + 1}">{"".join(deco)}</g>')
 
-    for k, (name, y0, y1, fill) in enumerate(reversed(LAYERS)):
-        d = len(LAYERS) - k
-        key = KEYS[name]
-        piece = side(y0, y1) + (pearls if name == "base" else "")
-        piece += top_face(y0, "url(#ps-gloss)" if name == "ganache" else fill)
-        if name == "cream":
-            shape = f'<path d="M{X0},{y0} L{wavy(y0, 1.6)} L{X1},{y1} L{X0},{y1}Z" fill="{fill}"/><path d="M{X0},{y1 - 1} H{X1}" stroke="#F3DCC6" stroke-width="2"/>'
-        elif name == "jam":
-            seeds = "".join(f'<ellipse cx="{f(rnd.uniform(X0 + 6, X1 - 6))}" cy="{f(rnd.uniform(y0 + 3, y1 - 3))}" rx="1.2" ry="1.8" fill="#F28AA2"/>' for _ in range(26))
-            seep = "".join(f'<path d="M{f(x)},{y1} q3,{f(rnd.uniform(5, 10))} 6,0" fill="{fill}"/>' for x in range(X0 + 18, X1 - 10, 37))
-            shape = f'<rect x="{X0}" y="{y0}" width="{X1 - X0}" height="{y1 - y0}" fill="{fill}"/>{seep}{seeds}<path d="M{X0},{y0 + 2} H{X1}" stroke="#E0546F" stroke-width="1.2" opacity=".7"/>'
-        elif name == "mousse":
-            shape = f'<path d="M{X0},{y0} L{wavy(y0, 1.2)} L{X1},{y1} L{X0},{y1}Z" fill="{fill}"/><path d="M{X0},{y0 + 4} H{X1}" stroke="#A56C5A" stroke-width="1.4" opacity=".7"/>'
-        elif name == "ganache":
-            shape = (f'<rect x="{X0}" y="{y0}" width="{X1 - X0}" height="{y1 - y0}" fill="url(#ps-gloss)"/><path d="M{X0 + 6},{y0 + 4} H{X1 - 40}" stroke="#9A6A5A" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>'
-                     f'<path d="M{X0 + 30},{TOP - 6} L{X1 - 60},{TOP - 2}" stroke="#A7776A" stroke-width="2" stroke-linecap="round" opacity=".6"/><path d="{drip}" fill="#4A2A22"/>')
-        else:
-            shape = f'<rect x="{X0}" y="{y0}" width="{X1 - X0}" height="{y1 - y0}" fill="{fill}"/>'
-        shape += f'<path d="M{X1},{y0} V{y1}" stroke="#2E1A15" stroke-width="2" opacity=".18"/>'
-        g.append(f'<g class="ps-layer {key}" style="--d:{d}">{piece}{shape}</g>')
-
-    # decorations on top
-    deco = [rosette(166, 126, 1.45), rosette(210, 146, 1.3), rosette(286, 160, 1, "#FFF4EC", "#E8CDB8"),
-            '<path d="M226 150 L244 72 L266 148Z" fill="#3B2420"/><path d="M236 138 L246 84" stroke="#7A5246" stroke-width="2.4" stroke-linecap="round"/><path d="M244 72 L266 148 L256 150Z" fill="#2A1712"/>',
-            '<path d="M310 164 q20 -28 46 -15 q-18 23 -46 15Z" fill="#4F8A4B"/><path d="M312 163 q18 -13 38 -13" stroke="#2F5E31" stroke-width="1.3" fill="none"/>',
-            raspberry(166, 104, 1.3), raspberry(210, 126, 1.15), raspberry(286, 148, .9), blueberry(190, 128, 9), blueberry(246, 156, 8), blueberry(372, 166, 6.5),
-            "".join(f'<path d="M{f(x)},{f(y)} l4,-2 l2,4 l-5,1Z" fill="#E0B44C"/>' for x, y in [(330, 164), (390, 166), (420, 167), (256, 120), (190, 104)])]
-    g.append(f'<g class="ps-layer ps-top k-ukras" style="--d:{len(LAYERS) + 1}">{"".join(deco)}</g>')
-
-    # leader lines and labels; each label carries the key of the layers it describes
+    # labels left and right of the stack, joined to their layer by a straight hairline
+    left_x, right_x = scr(-R, 0, 0)[0] - 46, OX + 46
     lab = []
-    for text, sx, sy, ly, key in LABELS:
-        lab.append(f'<g class="ps-lab {key}"><rect class="ps-hit" x="556" y="{ly - 30}" width="{len(text) * 12 + 20}" height="42" rx="21"/>'
-                   f'<circle cx="{sx}" cy="{sy}" r="3.2"/><path d="M{sx},{sy} C{sx + 40},{sy} {556 - 34},{ly - 6} 556,{ly - 6}"/><text x="566" y="{ly}">{text}</text></g>')
+    for key, (text, side, t) in LABELS.items():
+        if t is None:
+            tx, ty = big[0] - 22, big[1] - 36
+        else:
+            y0, y1 = spans[key]
+            tx, ty = on_front(t, (y0 + y1) / 2)
+        lx = left_x if side < 0 else right_x
+        w = len(text) * 11.6 + 24
+        hx = lx - w + 12 if side < 0 else lx - 12
+        anchor = "end" if side < 0 else "start"
+        lab.append(f'<g class="ps-lab {key}"><rect class="ps-hit" x="{f(hx)}" y="{f(ty - 21)}" width="{f(w)}" height="42" rx="21"/>'
+                   f'<circle cx="{f(tx)}" cy="{f(ty)}" r="3.2"/><path d="M{f(tx)},{f(ty)} H{f(lx - 8 * side)}"/>'
+                   f'<text x="{f(lx)}" y="{f(ty + 7)}" text-anchor="{anchor}">{text}</text></g>')
     g.append(f'<g class="ps-labels">{"".join(lab)}</g>')
-    return f'<svg viewBox="-120 20 920 490" aria-hidden="true" class="ps-svg">{"".join(g)}</svg>'
+    y_top, y_bot = fly[1] - 40, sy + 34 + R * .16
+    return f'<svg viewBox="-520 {f(y_top)} 1040 {f(y_bot - y_top)}" aria-hidden="true" class="ps-svg">{"".join(g)}</svg>'
 
 
 if __name__ == "__main__":

@@ -256,7 +256,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .ps-head h3 { font: 400 clamp(1.8rem, 3.4vw, 2.6rem)/1.1 var(--serif); }
 .ps-head p { margin-top: 8px; color: var(--soft); }
 .ps-svg { display: block; width: min(100%, 1000px); height: auto; margin: 10px auto 0; overflow: visible; }
-.ps-layer { --dl: calc(var(--d) * .12s); }
+.ps-layer { --dl: calc(var(--d) * .16s); }
 .ps-lab { --on: 0; cursor: default; }
 .ps-hit { fill: var(--cream); opacity: calc(var(--on) * .9); transition: opacity .3s; }
 .ps-lab circle { fill: var(--berry); transform-box: fill-box; transform-origin: center; scale: calc(1 + var(--on) * .8); transition: scale .35s var(--ease); }
@@ -264,7 +264,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .ps-lab text { font: italic 400 23px var(--serif); fill: color-mix(in srgb, var(--berry) calc(var(--on) * 100%), var(--ink)); transition: fill .3s; }
 .ps-lab { transition: opacity .35s; }
 .ps-legend { display: none; }
-.js .ab-slice .ps-layer { opacity: 0; translate: 0 -70px; transition: opacity .4s var(--dl), translate .8s var(--ease) var(--dl), transform .45s var(--ease), filter .45s; }
+.js .ab-slice .ps-layer { opacity: 0; translate: 0 -110px; transition: opacity .4s var(--dl), translate .8s var(--ease) var(--dl), transform .45s var(--ease), filter .45s; }
 .js .ab-slice.in .ps-layer { opacity: 1; translate: 0 0; }
 .ab-slice:hover .ps-layer, .ab-slice:focus-within .ps-layer { --dl: 0s; }
 .js .ab-slice .ps-labels { opacity: 0; transition: opacity .8s 1.3s; }
@@ -295,7 +295,7 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-ruke { --on: 1; }
 @media (max-width: 900px) {
   .ps-labels { display: none; }
-  .ps-svg { width: 159%; margin-left: -38%; }
+  .ps-svg { width: 270%; margin-left: -85%; }
   .ab-slice { overflow-x: clip; }
   .ps-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
   .ps-legend li { --on: 0; padding: 9px 14px; border-radius: 999px; background: color-mix(in srgb, var(--berry) calc(var(--on) * 100%), var(--cream)); color: color-mix(in srgb, #fff calc(var(--on) * 100%), var(--ink)); font: italic 400 1rem/1.1 var(--serif); cursor: pointer; transition: opacity .3s, background-color .3s; }
