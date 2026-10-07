@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.4.2 (07.10.2026)
+
+V2 „Slatki trenuci“:
+- Kontakt meni: u čokoladnom luku redosled je sada „pošaljite sliku, mi ostalo“, „Javite se“, pa ikonica torte.
+- Broj telefona na naslovnoj slici: iznad broja piše „pozovite nas“, a slušalica je u čokoladnom krugu. Na hover se čokolada razlije preko cele pilule, krug postane roze, slušalica zazvoni i oko nje se šire talasi.
+
 ## v0.4.1 (07.10.2026)
 
 V2 „Slatki trenuci“:

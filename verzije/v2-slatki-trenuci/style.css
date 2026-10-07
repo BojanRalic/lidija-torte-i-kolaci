@@ -81,7 +81,7 @@ svg { width: 1em; height: 1em; flex: none; }
 @media (hover: hover) { .cmenu:hover .cmenu-pop { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; } .cmenu:hover .chev { transform: rotate(180deg); } }
 .cm-head { position: relative; display: grid; justify-items: center; gap: 2px; margin-top: 12px; padding: 20px 20px 40px; border-radius: 0 0 160px 160px; background: var(--choc) radial-gradient(120% 90% at 50% 100%, #5A372F, transparent 70%); color: #E9D3CF; text-align: center; }
 .cm-head::after { content: ""; position: absolute; inset: 0 8px 8px; border: 1px solid rgb(248 240 232 / .22); border-top: 0; border-radius: 0 0 152px 152px; pointer-events: none; }
-.cm-cake { font-size: 1.7rem; color: var(--pink); margin-bottom: 4px; }
+.cm-cake { font-size: 1.7rem; color: var(--pink); margin-top: 6px; }
 .cm-head b { font: 400 1.8rem/1 var(--serif); color: var(--cream); }
 .cm-head span { font: italic 400 .98rem/1.3 var(--serif); color: var(--pink); }
 .cm { position: relative; display: flex; align-items: center; gap: 12px; margin: 0 10px; padding: 10px 12px 10px 10px; border-radius: 20px; text-decoration: none; color: var(--soft); font-size: .9rem; line-height: 1.25; transition: background-color .25s, transform .35s var(--ease); }
@@ -114,8 +114,25 @@ svg { width: 1em; height: 1em; flex: none; }
 .hero-img img { position: relative; z-index: 1; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50% 50% var(--r) var(--r) / 38% 38% var(--r) var(--r); box-shadow: 0 40px 60px -40px rgb(46 29 26 / .7); transition: transform .8s var(--ease); }
 .hero-img:hover img { transform: translateY(-6px) rotate(-.8deg); }
 .hero-img figcaption { position: absolute; z-index: 2; left: -22px; bottom: 34px; }
-.hero-img figcaption a { display: inline-flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: 999px; background: var(--cream); color: var(--choc); text-decoration: none; font-weight: 700; box-shadow: 0 16px 24px -16px rgb(46 29 26 / .6); transition: transform .35s var(--ease); }
-.hero-img figcaption a:hover { transform: translateY(-3px); }
+/* Hero phone: chocolate fills the pill from the left, the handset rings and sound waves ripple out */
+.hero-call { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 12px; padding: 8px 22px 8px 8px; border-radius: 999px; background: var(--cream); color: var(--choc); text-decoration: none; box-shadow: 0 16px 24px -16px rgb(46 29 26 / .6); transition: color .35s, transform .45s var(--ease), box-shadow .45s var(--ease); }
+.hero-call::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--choc); transform: scaleX(0); transform-origin: 30px 50%; transition: transform .55s var(--ease); }
+.hc-ic { position: relative; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--choc); color: var(--cream); font-size: 1.15rem; transition: background-color .35s, color .35s; }
+.hc-ic svg { position: relative; z-index: 1; }
+.hc-ic i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--pink); opacity: 0; }
+.hc-txt { display: grid; font-weight: 700; font-size: 1.05rem; line-height: 1.15; letter-spacing: .01em; }
+.hc-txt small { font: italic 400 .85rem/1.1 var(--serif); color: var(--berry); transition: color .35s; }
+@keyframes hc-ring { 10%, 50% { rotate: -16deg; } 30%, 70% { rotate: 16deg; } 85% { rotate: 0deg; } }
+@keyframes hc-wave { from { scale: 1; opacity: .9; } to { scale: 1.9; opacity: 0; } }
+@media (hover: hover) {
+  .hero-call:hover { color: var(--cream); transform: translateY(-3px); box-shadow: 0 22px 30px -18px rgb(46 29 26 / .75); }
+  .hero-call:hover::before { transform: scaleX(1); }
+  .hero-call:hover .hc-ic { background: var(--pink); color: var(--choc); }
+  .hero-call:hover .hc-ic svg { animation: hc-ring .8s var(--ease) .1s; }
+  .hero-call:hover .hc-ic i { animation: hc-wave 1.3s ease-out infinite; }
+  .hero-call:hover .hc-ic i + i { animation-delay: .45s; }
+  .hero-call:hover .hc-txt small { color: var(--pink); }
+}
 
 /* The sheet slides over the hero with big rounded corners */
 .sheet { position: relative; margin-top: calc(-1 * var(--r) - 10px); border-radius: var(--r) var(--r) 0 0; background: var(--cream); }
