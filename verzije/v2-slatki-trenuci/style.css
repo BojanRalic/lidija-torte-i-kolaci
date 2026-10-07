@@ -186,7 +186,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 .calc-cake svg { width: 100%; height: auto; max-height: 460px; }
 .tier { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .6s var(--ease), opacity .4s; }
 .tier.off { transform: translateY(-60px) scale(.9); opacity: 0; }
-.candle { transition: transform .6s var(--ease); }
+.crown { transition: opacity .35s, transform .6s var(--ease); }
+.tier:not(.top) .crown { opacity: 0; transform: translateY(-14px); }
 .cake-tag { text-align: center; font: 400 1.4rem/1 var(--serif); font-style: italic; color: #FFE3EA; }
 
 /* Order */
@@ -275,16 +276,18 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 :root { interpolate-size: allow-keywords; }
 
 /* Instagram */
+/* Instagram: one chosen photo in an arched frame on a blush panel */
 .insta { padding: 0 clamp(20px, 5vw, 70px) clamp(70px, 8vw, 110px); }
-.insta h2 { margin-bottom: 24px; font-size: clamp(1.9rem, 3.6vw, 2.8rem); text-align: center; }
-.insta h2 a { color: var(--berry); text-decoration: none; }
-.ig-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
-.ig { overflow: hidden; border-radius: 24px; aspect-ratio: 1; }
-.ig img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-.ig:hover img { transform: scale(1.07); }
-.ig-more { display: grid; place-content: center; text-align: center; gap: 4px; padding: 14px; background: var(--choc); color: #fff; text-decoration: none; font-size: .9rem; transition: background-color .3s; }
-.ig-more b { font: 400 2.4rem/1 var(--serif); color: var(--pink); }
-.ig-more:hover { background: var(--berry); }
+.ig-card { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(30px, 6vw, 80px); align-items: center; padding: clamp(28px, 4vw, 54px); border-radius: var(--r); background: var(--rose-2); }
+.ig-photo { margin: 0; }
+.ig-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 50% 50% var(--r) var(--r) / 34% 34% var(--r) var(--r); }
+.ig-kicker { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: var(--berry); }
+.ig-kicker svg { font-size: 1.4rem; }
+.ig-copy h2 { margin-top: 10px; font-size: clamp(2.2rem, 4.2vw, 3.4rem); }
+.ig-copy > p:not([class]) { margin-top: 14px; color: var(--soft); max-width: 46ch; }
+.ig-copy .ab-stats { margin-bottom: 28px; }
+.ig-copy .ab-stats li { background: var(--cream); }
+@media (max-width: 900px) { .ig-card { grid-template-columns: minmax(0, 1fr); } .ig-photo { width: min(100%, 380px); justify-self: center; } }
 
 /* Footer */
 .foot { padding: clamp(60px, 7vw, 90px) clamp(20px, 5vw, 70px) 110px; background: var(--choc); color: #F1E2DD; }
@@ -318,8 +321,6 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   .reviews { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
   .reviews .actions { justify-content: center; }
   .rev-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: min(82%, 320px); overflow-x: auto; justify-self: stretch; text-align: left; }
-  .ig-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ig-row .ig:nth-child(4) { display: none; }
   .foot-main { grid-template-columns: minmax(0, 1fr); }
   .facts { grid-template-columns: 1fr 1fr; }
   .calc-cake { max-width: 340px; margin: 0 auto; }
@@ -382,3 +383,6 @@ img.lv-1 { right: -40px; } img.lv-3 { right: -44px; }
 
 /* Phone numbers never break across lines */
 a[href^="tel:"] { white-space: nowrap; }
+
+/* Client photos (portrait): keep the cake top in landscape frames */
+.intro-img img:not(.lav) { object-position: 50% 22%; }

@@ -3,9 +3,10 @@
 ## Od klijenta (pre objave)
 
 - [ ] Posle zamene bilo koje fotografije pokrenuti `sh tools/slike.sh` (pravi manje verzije od 400 i 800 px za telefone).
-- [ ] Prave fotografije umesto zamenskih: „Torte za kuću“, „Slavski kolači“, „Kolači u čaši i praline“ (sada su sa Wikimedia Commons, vidi `assets/img/SOURCES.md`).
-- [ ] Prava fotografija Lidije i Milana za „Lidija i Milan“ (sada su tuđe ruke sa Wikimedia Commons).
-- [ ] Originali fotografija sa Instagrama u punoj rezoluciji (sada su skinute sa javnog embeda, 1080 px).
+- [x] Prave fotografije radionice ubačene na sve četiri stranice (07.10.2026, `assets/img/SOURCES.md`).
+- [ ] Klijent bira fotografiju za Instagram sekciju (sada `radionica-lidija.webp`, torta u radionici sa natpisom LIDIJA).
+- [ ] Potvrditi broj pratilaca i objava u Instagram sekciji (sada 3.515 pratilaca i 1.634 objave).
+- [ ] Natpis na zastavicama torte u kalkulatoru je „ŽIVELI“; menja se u `WORD` u `tools/torta.py`, pa `python3 tools/torta.py`.
 - [ ] Potvrditi pravilo porcija: kalkulator računa oko 8 parčadi po kilogramu, minimum 2 kg.
 - [ ] Potvrditi radno vreme: upitnik kaže porudžbine od 10 do 19h, Google Maps kaže da otvaraju u 9h.
 - [ ] Potvrditi godinu: „registrovana 2020“ u odgovorima, a naziv firme je „TORTE KOLAČI LIDIJA 2022“.
@@ -15,7 +16,6 @@
 - [ ] Odobriti tekst „O nama“ i slogan „Torte koje se prvo pojedu očima.“
 - [ ] Poruke zahvalnosti mušterija (sa imenom i mestom) za sekciju utisaka.
 - [x] Izabrane varijante: „Kako se poručuje“ P1 (satenska traka), „Lidija i Milan“ L4 (presek torte) na kariranom stolnjaku. Preneto u `index.html`.
-- [ ] Prava fotografija za polaroid uz presek torte (sada praline sa Wikimedia Commons).
 
 ## Tri nove verzije dizajna (07.10.2026)
 

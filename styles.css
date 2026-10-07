@@ -393,7 +393,8 @@ input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 
 .calc-cake svg { width: 100%; height: auto; max-height: 600px; }
 .tier { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .6s var(--ease), opacity .4s; }
 .tier.off { transform: translateY(-60px) scale(.9); opacity: 0; }
-.candle { transition: transform .6s var(--ease); }
+.crown { transition: opacity .35s, transform .6s var(--ease); }
+.tier:not(.top) .crown { opacity: 0; transform: translateY(-14px); }
 .cake-tag {
   position: relative; width: max-content; margin: -4px auto 0; padding: 10px 18px 10px 30px;
   background: var(--board); border-radius: 4px 12px 12px 4px;
@@ -450,21 +451,28 @@ input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 
 .about-copy p { margin-top: 18px; color: var(--ink-soft); font-size: 1.1rem; max-width: 50ch; }
 
 /* Instagram */
-.insta { padding: clamp(90px, 11vw, 150px) 0 clamp(110px, 12vw, 160px); }
-.insta-head { max-width: var(--max); margin: 0 auto 28px; padding: 0 var(--gutter); display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-.insta h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
-.insta-handle { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 1.2rem/1 var(--body); color: var(--berry); }
+/* Instagram: one photo the client picks, plus a clear follow button */
+.insta { padding: clamp(90px, 11vw, 150px) var(--gutter) clamp(110px, 12vw, 160px); }
+.ig-promo { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); gap: clamp(48px, 7vw, 110px); align-items: center; }
+.ig-photo { justify-self: end; width: min(100%, 410px); transform: rotate(-3deg); }
+.ig-photo img { aspect-ratio: 4 / 5; }
+.ig-photo figcaption { padding: 14px 6px 2px; }
+.ig-photo .sticker { position: absolute; right: -40px; bottom: 64px; z-index: 3; width: 142px; padding: 20px; font-size: .9rem; text-decoration: none; transition: rotate .4s var(--ease); }
+.ig-photo .sticker:hover { rotate: -10deg; }
+.ig-photo .sticker span { font-size: 1.15rem; }
+.insta-handle { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 700 1.15rem/1 var(--body); color: var(--berry); }
 .insta-handle svg { font-size: 1.6rem; }
-.insta-handle small { font: 500 .95rem/1 var(--body); color: var(--ink-soft); }
-.insta-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; padding: 0 var(--gutter); max-width: var(--max); margin: 0 auto; }
-.ig { display: block; overflow: hidden; border-radius: 10px; aspect-ratio: 1; }
-.ig img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
-.ig:hover img { transform: scale(1.06); }
-.ig-more { display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 24px; background: var(--pink); color: var(--ink); text-decoration: none; font: 600 1.05rem/1.3 var(--body); transition: background-color .25s; }
-.ig-more:hover { background: #F49DB2; }
-.ig-more-n { font: 400 clamp(2.2rem, 4vw, 3.4rem)/1 var(--display); color: var(--berry); }
-.ig-more svg { font-size: 1.6rem; color: var(--berry); transition: transform .3s var(--ease); }
-.ig-more:hover svg { transform: translateX(6px); }
+.ig-copy h2 { margin-top: 14px; font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
+.ig-copy > p { margin-top: 16px; font-size: 1.12rem; color: var(--ink-soft); max-width: 46ch; }
+.ig-stats { list-style: none; display: flex; flex-wrap: wrap; gap: 14px 34px; margin: 26px 0 30px; padding: 0; color: var(--ink-soft); font-weight: 600; }
+.ig-stats b { display: block; margin-bottom: 4px; font: 400 clamp(2rem, 3.4vw, 2.7rem)/1 var(--display); color: var(--berry); }
+.btn-ig { --bg: var(--berry); }
+.btn-ig:hover { --bg: #85305A; }
+@media (max-width: 900px) {
+  .ig-promo { grid-template-columns: minmax(0, 1fr); }
+  .ig-photo { justify-self: center; width: min(82%, 380px); }
+  .ig-photo .sticker { right: -28px; bottom: 54px; width: 116px; padding: 14px; font-size: .8rem; }
+}
 
 /* Diaspora: airmail postcard */
 .far { padding: 0 var(--gutter) clamp(70px, 8vw, 110px); }
@@ -582,7 +590,6 @@ input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 
   .postcard { grid-template-columns: 1fr; }
   .pc-side { border-left: 0; border-top: 2px dashed #EFC6D1; padding: 24px 0 0; min-height: 0; gap: 18px; }
   .postmark { right: 140px; top: 20px; }
-  .insta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .calc-copy { display: contents; }
   .calc-slip { order: 1; }
   .calc-cake { order: 2; max-width: 340px; margin: 0 auto; }
@@ -634,7 +641,6 @@ input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 
   .round-st b { font-size: 1.5rem; }
   .rs-pink { right: -8px; }
   .rs-gold { width: 98px; right: 24px; }
-  .insta-strip { gap: 8px; }
   .dock {
     position: fixed; z-index: 50; left: 10px; right: 10px; bottom: 10px;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;

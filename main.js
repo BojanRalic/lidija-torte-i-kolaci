@@ -75,7 +75,9 @@ if (motionOK && 'IntersectionObserver' in window) {
 const range = document.getElementById('guests');
 if (range) {
 const fmt = new Intl.NumberFormat('sr-RS');
-const TOPS = { 1: 300, 2: 226, 3: 162, 4: 108 };
+// Tier tops and topper heights come from tools/torta.py.
+const TOPS = { 1: 310, 2: 230, 3: 160, 4: 102 };
+const HEAD = { 1: 146, 2: 112, 3: 80, 4: 78 };
 const narrow = matchMedia('(max-width: 900px)');
 const cakeSvg = document.getElementById('cake-svg');
 const LABELS = { 1: 'lepa torta za sto', 2: 'torta na dva sprata', 3: 'tri sprata, za veliko slavlje', 4: 'četiri sprata, svadbeni format' };
@@ -88,15 +90,16 @@ function updateCake() {
   document.getElementById('kg').textContent = fmt.format(kg);
   document.getElementById('price').textContent = `${fmt.format(kg * 1600)} do ${fmt.format(kg * 2000)}`;
   range.style.setProperty('--fill', ((g - range.min) / (range.max - range.min) * 100) + '%');
-  document.querySelectorAll('.tier').forEach((t) => t.classList.toggle('off', +t.dataset.tier > tiers));
-  const candle = document.getElementById('candle');
-  if (candle) candle.style.transform = `translateY(${TOPS[tiers] - 108}px)`;
+  document.querySelectorAll('.tier').forEach((t) => {
+    t.classList.toggle('off', +t.dataset.tier > tiers);
+    t.classList.toggle('top', +t.dataset.tier === tiers);
+  });
   const label = document.getElementById('cake-label');
   if (label) label.textContent = LABELS[tiers];
   // On narrow screens the drawing hugs the cake, so no empty headroom sits between slider and price.
   if (cakeSvg && cakeSvg.dataset.trim !== 'off') {
-    const top = narrow.matches ? TOPS[tiers] - 80 : 0;
-    cakeSvg.setAttribute('viewBox', `0 ${top} 400 ${420 - top}`);
+    const top = narrow.matches ? TOPS[tiers] - HEAD[tiers] - 8 : 0;
+    cakeSvg.setAttribute('viewBox', `0 ${top} 400 ${512 - top}`);
   }
   const msg = `Zdravo! Treba mi torta za ${g} osoba (oko ${fmt.format(kg)} kg). Datum: `;
   document.getElementById('calc-wa').href = 'https://wa.me/381649643302?text=' + encodeURIComponent(msg);

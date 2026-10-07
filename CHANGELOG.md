@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.3.0 (07.10.2026)
+
+Prave fotografije radionice, nova Instagram sekcija i nova torta u kalkulatoru, na sve četiri stranice.
+
+- Fotografije: sve zamenske slike zamenjene su fotografijama koje je poslala radionica. Slike sa imenom sekcije stoje u toj sekciji (Svadbene torte, Dečje torte, Krštenje i rođenje bebe, Slavski kolači, Kolači u čaši i praline, Lidija i Milan, Svaka torta je napravljena za vas, Cene bez iznenađenja, naslovna). Ostala mesta dobila su fotografije iz istog foldera.
+- Naslovna fotografija ima kvadratnu i široku verziju sa produženom bordo pozadinom, da se cela torta vidi u svakom okviru.
+- Instagram: umesto niza objava sa profila, sekcija sada reklamira profil @lidijatorte sa jednom izabranom fotografijom, brojem pratilaca i objava i dugmetom „Zapratite nas“. Svaka verzija ima svoj izgled: polaroid sa nalepnicom (glavna), fotografija u tankom okviru (V1), luk na rozom panelu (V2), okrugla fotografija na pocepanom papiru (V3, sekcija je nova).
+- Kalkulator „Koliko torte za vaše goste“: nova ilustracija po uzoru na sliku radionice. Roze spratovi sa uvijenim kremom, belim girlandama i plavim cvetićima, tufnama, jagodama na vrhu i zastavicama „ŽIVELI“, na lila postolju. Jagode i zastavice uvek stoje na najvišem spratu. Crtež pravi `tools/torta.py`.
+- Stare zamenske slike sklonjene su iz projekta. Izvori fotografija su u `assets/img/SOURCES.md`.
+
 ## v0.2.1 (07.10.2026)
 
 Ništa više ne viri iz svog okvira i telefon ima više prostora, na sve četiri stranice.
