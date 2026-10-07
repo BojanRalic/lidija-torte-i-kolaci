@@ -270,28 +270,16 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 @keyframes ps-glow { 0%, 100% { filter: brightness(1.04) drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px rgb(163 68 95 / .55)); } 50% { filter: brightness(1.12) drop-shadow(0 0 3px #fff) drop-shadow(0 0 16px rgb(163 68 95 / .8)); } }
 .js .ab-slice .ps-labels { opacity: 0; transition: opacity .8s 1.3s; }
 .js .ab-slice.in .ps-labels { opacity: 1; }
-.ab-slice:has(.k-ukras:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-ukras) { opacity: .3; }
-.ab-slice:has(.k-ukras:is(:hover, :focus-visible)) .ps-layer:not(.k-ukras) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-ukras:is(:hover, :focus-visible)) .ps-layer.k-ukras { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-ukras:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-ukras { --on: 1; }
-.ab-slice:has(.k-cok:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-cok) { opacity: .3; }
-.ab-slice:has(.k-cok:is(:hover, :focus-visible)) .ps-layer:not(.k-cok) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-cok:is(:hover, :focus-visible)) .ps-layer.k-cok { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-cok:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-cok { --on: 1; }
-.ab-slice:has(.k-kore:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-kore) { opacity: .3; }
-.ab-slice:has(.k-kore:is(:hover, :focus-visible)) .ps-layer:not(.k-kore) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-kore:is(:hover, :focus-visible)) .ps-layer.k-kore { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-kore:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-kore { --on: 1; }
-.ab-slice:has(.k-fil:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-fil) { opacity: .3; }
-.ab-slice:has(.k-fil:is(:hover, :focus-visible)) .ps-layer:not(.k-fil) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-fil:is(:hover, :focus-visible)) .ps-layer.k-fil { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-fil:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-fil { --on: 1; }
-.ab-slice:has(.k-voce:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-voce) { opacity: .3; }
-.ab-slice:has(.k-voce:is(:hover, :focus-visible)) .ps-layer:not(.k-voce) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-voce:is(:hover, :focus-visible)) .ps-layer.k-voce { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-voce:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-voce { --on: 1; }
-.ab-slice:has(.k-ruke:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li):not(.k-ruke) { opacity: .3; }
-.ab-slice:has(.k-ruke:is(:hover, :focus-visible)) .ps-layer:not(.k-ruke) { filter: grayscale(.85) brightness(1.12) contrast(.75); }
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) .ps-layer.k-ruke { animation: ps-glow 1.6s ease-in-out infinite; }
 .ab-slice:has(.k-ruke:is(:hover, :focus-visible)) :is(.ps-lab, .ps-legend li).k-ruke { --on: 1; }
 @media (max-width: 900px) {

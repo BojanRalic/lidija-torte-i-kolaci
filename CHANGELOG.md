@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.2 (07.10.2026)
+
+V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:
+- Na hover ništa više ne gubi boju. Ostali slojevi ne posive, a ostali opisi ne blede. Izabrani sloj se ističe roze sjajem, a njegov opis dobija bordo boju i krem podlogu.
+
 ## v0.5.1 (07.10.2026)
 
 V2 „Slatki trenuci“, sekcija „Pogledajte šta je unutra“:
